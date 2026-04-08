@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BagVerse Siparişlerim</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#1173d4",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="sticky top-0 z-20 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
+<div class="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 sm:px-6 lg:px-8">
+<div class="flex items-center gap-8">
+<a href="index.html" class="flex items-center gap-3 text-slate-900 dark:text-slate-50">
+  <div class="size-6 text-primary">
+    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_6_535)">
+        <path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_6_535">
+          <rect fill="white" width="48" height="48"></rect>
+        </clipPath>
+      </defs>
+    </svg>
+  </div>
+  <h2 class="text-lg font-bold tracking-[-0.015em]">BAGVERSE</h2>
+</a>
+
+
+</div>
+<div class="flex flex-1 items-center justify-end gap-6">
+<nav class="hidden items-center gap-8 text-sm lg:flex">
+<a class="font-medium text-slate-600 dark:text-slate-300 transition hover:text-primary dark:hover:text-primary" href="index.html">Anasayfa</a>
+<a class="font-medium text-slate-600 dark:text-slate-300 transition hover:text-primary dark:hover:text-primary" href="products.html">Ürünler</a>
+<a class="font-medium text-slate-600 dark:text-slate-300 transition hover:text-primary dark:hover:text-primary" href="contact.html">İletişim</a>
+<a class="font-medium text-slate-600 dark:text-slate-300 transition hover:text-primary dark:hover:text-primary" href="about-us.html">Hakkımızda</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition hover:bg-slate-200 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition hover:bg-slate-200 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCc3k4AKAhquSz-LrijledEWReAc2H0yrlq7nuJJzVaY8NNfXR1Imy4uLespKTuA4O_lgMdibJzlIq2hwMf3vvBS0eGjF3Pio9uF-JXBiVw1PhMsDK0DqWnz_HE26ro-baWzqBYrptMRAlghvcn5JzlZcQURGI1KCe13-DlaqSSTdCKrHf5EbNec53j_uQom3CwrAkMOFSUWAfNGrCawhX1BumnfBRQYeovfG0nqGScKPkSFnljF1pGAGcZ7PJcVOClpFOv6C_NznQ");'></div>
+</div>
+</div>
+</div>
+</header>
+<div class="mx-auto flex w-full max-w-screen-xl flex-1 gap-8 px-4 py-8 sm:px-6 lg:px-8">
+<aside class="hidden w-64 flex-col gap-8 md:flex">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAr7LFapamJMK5foSEM9EE0u6CUj7RhKmqEH0Vzl-ChuyNPv2K312N-hxI4cRleOcyMiLfTlm_hDjvEgkB4J96bnNDotQ1dMbBprfxjWTCNd1pcXopYVsXl_G7H3U2iI_ytaH32Cka9zFnxaoEk_XJm1b-jLGnnitSgiD34B5QQAnzqBrcazLq7xc0-HjdtvE4C2PkE3HUF6ZTHkb-iJRb8Xuk6Wx0UoWEy3hZCEjtuIYocLCi7_6K_6xy4v4_LunIyNeFn8jbXoz8");'></div>
+<div class="flex flex-col">
+<h1 class="text-base font-semibold text-slate-800 dark:text-slate-100" id="userName">
+  
+</h1>
+<p class="text-sm text-slate-500 dark:text-slate-400" id="userEmail">
+
+</p>
+
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between">
+<nav class="flex flex-col gap-1">
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" href="profile.html">
+<span class="material-symbols-outlined">person</span>
+<p class="text-sm font-medium group-hover:font-semibold">Hesap Bilgileri</p>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 bg-primary/10 text-primary" href="orders.html">
+<span class="material-symbols-outlined fill">inventory_2</span>
+<p class="text-sm font-semibold">Siparişlerim</p>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" href="profile-address.html">
+<span class="material-symbols-outlined">location_on</span>
+<p class="text-sm font-medium group-hover:font-semibold">Adreslerim</p>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" href="payment-methods.html">
+<span class="material-symbols-outlined">credit_card</span>
+<p class="text-sm font-medium group-hover:font-semibold">Ödeme Yöntemlerim</p>
+</a>
+
+</nav>
+
+</div>
+</aside>
+<main class="flex-1">
+<div class="flex flex-col gap-8">
+<h1 class="text-slate-900 dark:text-slate-50 text-3xl font-bold tracking-tight">Siparişlerim</h1>
+<div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark">
+
+<table class="min-w-full text-left text-sm">
+<thead class="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/20 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">
+  <tr>
+    <th class="px-6 py-4">Sipariş No</th>
+    <th class="px-6 py-4">Tarih</th>
+    <th class="px-6 py-4">Tutar</th>
+    <th class="px-6 py-4">Durum</th>
+    <th class="px-6 py-4"></th>
+  </tr>
+</thead>
+</table>
+<table>
+<div id="emptyState" class="p-8 text-center">
+  <p class="mb-4 text-slate-500">
+    Henüz hiç siparişiniz yok 🛒
+  </p>
+
+  <a
+    href="products.html"
+    class="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90 transition
+    hover:bg-primary/90
+   transition-all duration-200 ease-out
+
+         hover:scale-105
+        
+"
+  >
+    Alışverişe Başla
+  </a>
+</div>
+
+<tbody id="ordersTable" class="divide-y divide-slate-200 dark:divide-slate-800">
+</tbody>
+
+</table>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+
+
+  console.log("RAW orders:", JSON.parse(localStorage.getItem("orders")));
+console.log("currentUser:", JSON.parse(localStorage.getItem("currentUser")));
+
+
+
+
+
+  const tableBody = document.getElementById("ordersTable");
+  const emptyState = document.getElementById("emptyState");
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const allOrders = JSON.parse(localStorage.getItem("orders")) || [];
+
+  // ❌ Giriş yoksa
+  if (!currentUser) {
+    console.warn("Kullanıcı bulunamadı");
+    emptyState.classList.remove("hidden");
+    return;
+  }
+
+  // ✅ Siparişleri kullanıcıya göre filtrele
+  const orders = allOrders.filter(
+    order => order.userEmail === currentUser.email
+  );
+
+  // ✅ Profil bilgileri
+  const userNameEl = document.getElementById("userName");
+  const userEmailEl = document.getElementById("userEmail");
+
+  if (userNameEl) {
+    userNameEl.textContent =
+      currentUser.name + " " + currentUser.surname;
+  }
+
+  if (userEmailEl) {
+    userEmailEl.textContent = currentUser.email;
+  }
+
+  // ✅ Siparişleri render et
+  function renderOrders() {
+    tableBody.innerHTML = "";
+
+    if (orders.length === 0) {
+      emptyState.classList.remove("hidden");
+      return;
+    }
+
+    emptyState.classList.add("hidden");
+
+    orders.forEach(order => {
+      tableBody.innerHTML += `
+        <tr>
+          <td class="px-6 py-4 font-medium">#${order.id}</td>
+          <td class="px-6 py-4">${order.date}</td>
+          <td class="px-6 py-4 font-medium">₺${order.total}</td>
+          <td class="px-6 py-4">Hazırlanıyor</td>
+          <td class="px-6 py-4 text-right">
+            <a href="order-tracking.html?id=${order.id}"
+               class="text-primary font-semibold">
+              Sipariş Detayları
+            </a>
+          </td>
+        </tr>
+      `;
+    });
+  }
+
+  renderOrders();
+});
+</script>
+
+
+</body></html>

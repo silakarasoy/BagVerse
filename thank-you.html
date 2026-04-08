@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Confirmation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#1173d4",
+                    "background-light": "#f6f7f8",
+                    "background-dark": "#101922",
+                },
+                fontFamily: {
+                    "display": ["Manrope", "sans-serif"]
+                },
+                borderRadius: {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+                },
+            },
+        },
+    }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+
+    <style>
+@media print {
+  header,
+  .print-hide {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+  }
+}
+</style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- TopNavBar Component -->
+<header class="w-full bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<a href="index.html" class="flex items-center gap-3 text-slate-900 dark:text-slate-50">
+  <div class="size-6 text-primary">
+    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_6_535)">
+        <path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_6_535">
+          <rect fill="white" width="48" height="48"></rect>
+        </clipPath>
+      </defs>
+    </svg>
+  </div>
+  <h2 class="text-lg font-bold tracking-[-0.015em]">BAGVERSE</h2>
+</a>
+
+<div class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium" href="index.html">Anasayfa</a>
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium" href="products.html">Ürünler</a>
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium" href="contact.html">İletişim</a>
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium" href="about-us.html">Hakkımızda</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-full h-10 w-10 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-2xl">search</span>
+</button>
+<a href="cart.html">
+<button class="flex items-center justify-center rounded-full h-10 w-10 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-2xl">shopping_bag</span>
+</button> </a>
+<a href="profile.html">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/50 dark:bg-slate-800/50 text-[#0d141b] dark:text-white hover:bg-slate-200 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">person</span>
+</button> </a>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full">
+<div class="py-12 sm:py-16 lg:py-20">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
+<span class="material-symbols-outlined text-4xl text-green-600 dark:text-green-400">check_circle</span>
+</div>
+<div class="mt-6">
+<h1 id="customerName" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">Teşekkürler!</h1>
+<p class="mt-2 text-lg text-slate-600 dark:text-slate-400">Siparişiniz başarıyla alındı.</p>
+<p class="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">Sipariş Numaranız: <span id="orderId" class="text-slate-800 dark:text-slate-200"></span></p>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-6">
+                            Siparişinizin bir kopyası ve fatura bilgileri e-posta adresinize gönderildi.
+                        </p>
+</div>
+<!-- Stats -->
+<div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+<p class="text-slate-600 dark:text-slate-400 text-sm font-medium">Sipariş Durumu</p>
+<p class="text-slate-900 dark:text-slate-50 tracking-tight text-2xl font-bold">Onaylandı</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+<p class="text-slate-600 dark:text-slate-400 text-sm font-medium">Tahmini Teslimat Tarihi</p>
+<p id="deliveryDate" class="text-slate-900 dark:text-slate-50 tracking-tight text-2xl font-bold"></p>
+</div>
+</div>
+<!-- Order Details Grid -->
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Order Summary -->
+<div class="lg:col-span-2 p-6 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl">
+<h2 class="text-lg font-bold text-slate-900 dark:text-slate-50">Sipariş Özeti</h2>
+<div class="mt-4 flow-root">
+<ul id="orderItems" class="-my-4 divide-y divide-slate-200 dark:divide-slate-700"></ul>
+</div>
+<div class="mt-6 border-t border-slate-200 dark:border-slate-700 pt-6 space-y-3 text-sm">
+<div class="flex justify-between">
+<p class="text-slate-600 dark:text-slate-400">Ara Toplam</p>
+<p id="orderSubtotal" class="font-medium text-slate-800 dark:text-slate-200"></p>
+</div>
+<div id="discountRow" class="flex justify-between hidden">
+  <p class="text-slate-600 dark:text-slate-400">
+    İndirim
+  </p>
+  <p id="orderDiscount" class="font-medium text-green-600"></p>
+</div>
+
+<div class="flex justify-between">
+<p class="text-slate-600 dark:text-slate-400">Kargo</p>
+<p id="orderShipping" class="font-medium text-slate-800 dark:text-slate-200"></p>
+</div>
+<div class="flex justify-between text-base font-semibold">
+<p class="text-slate-900 dark:text-slate-50">Toplam</p>
+<p  id="orderTotal" class="text-slate-900 dark:text-slate-50"></p>
+</div>
+</div>
+</div>
+<!-- Right Column: Details -->
+<div class="p-6 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl h-fit">
+<div class="flex justify-between items-start">
+<h2 class="text-lg font-bold text-slate-900 dark:text-slate-50">Detaylar</h2>
+<button id="printInvoiceBtn"
+  class="flex items-center gap-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary">
+  <span class="material-symbols-outlined text-base">print</span>
+  Faturayı Yazdır
+</button>
+                                </button>
+</div>
+<div class="mt-4 space-y-6 text-sm">
+<div>
+<h3 class="font-semibold text-slate-800 dark:text-slate-200">Teslimat Adresi</h3>
+<address id="orderAddress"></address>
+
+</div>
+<div>
+<h3 class="font-semibold text-slate-800 dark:text-slate-200">Ödeme Yöntemi</h3>
+<div class="mt-1 flex items-center gap-2">
+<div class="w-10 h-6 rounded border border-slate-200 dark:border-slate-700 flex items-center justify-center bg-white dark:bg-slate-800">
+<svg class="h-4 text-blue-600" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.62,8.5H3.38A1.38,1.38,0,0,0,2,9.88V19.12A1.38,1.38,0,0,0,3.38,20.5H20.62A1.38,1.38,0,0,0,22,19.12V9.88A1.38,1.38,0,0,0,20.62,8.5Zm-2.75,9.25a.75.75,0,0,1,0-1.5h3a.75.75,0,0,1,0,1.5Zm-4,0a.75.75,0,0,1,0-1.5h2a.75.75,0,0,1,0,1.5Z"></path><path d="M22,5.88V4.38A1.38,1.38,0,0,0,20.62,3H3.38A1.38,1.38,0,0,0,2,4.38v7.24a1.36,1.36,0,0,0,0,.26,1.38,1.38,0,0,0,1.38-1.38V5.88A1.38,1.38,0,0,1,4.76,4.5H19.24A1.38,1.38,0,0,1,20.62,5.88Z"></path></svg>
+</div>
+<p id="paymentInfo"
+   class="text-slate-600 dark:text-slate-400">
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="flex w-full sm:w-auto max-w-xs cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 dark:focus:ring-offset-background-dark" href="order-tracking.html">Siparişimi Takip Et</a>
+<a class="flex w-full sm:w-auto max-w-xs cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-600 focus:ring-offset-2 dark:focus:ring-offset-background-dark" href="products.html">Alışverişe Devam Et</a>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+
+
+
+<script>
+const lastOrder = JSON.parse(localStorage.getItem("lastOrder"));
+
+if (lastOrder) {
+  localStorage.setItem("lastOrderId", lastOrder.id);
+}
+
+if (!lastOrder) {
+  alert("Sipariş bulunamadı!");
+  window.location.href = "index.html";
+}
+
+
+// 👤 İsim
+
+const currentUser = JSON.parse(localStorage.getItem("currentUser") || 'null');
+const customerName = lastOrder.address?.name || "Değerli Müşterimiz";
+document.getElementById("customerName").innerText =
+  `Teşekkürler, ${customerName}! 🎉`;
+
+
+// 🧾 Sipariş No
+document.getElementById("orderId").innerText =
+  "#BV-" + lastOrder.id;
+
+// 👜 Ürünler
+const itemsContainer = document.getElementById("orderItems");
+
+lastOrder.items.forEach(item => {
+  itemsContainer.innerHTML += `
+    <li class="flex items-center py-4">
+      <div class="h-20 w-20 overflow-hidden rounded-lg bg-slate-100">
+        <img src="${item.image}" class="h-full w-full object-cover">
+      </div>
+
+      <div class="ml-4 flex-1">
+        <div class="flex justify-between font-medium">
+          <h3>${item.name}</h3>
+          <p>₺${(item.price * item.quantity).toFixed(2)}</p>
+        </div>
+        <p class="text-sm text-slate-500">Adet: ${item.quantity}</p>
+      </div>
+    </li>
+  `;
+});
+
+// 💰 Fiyatlar
+document.getElementById("orderSubtotal").innerText =
+  `₺${lastOrder.subtotal.toFixed(2)}`;
+
+  // 💸 İndirim Hesabı
+const discount =
+  (lastOrder.subtotal + lastOrder.shipping) - lastOrder.total;
+
+if (discount > 0) {
+  document.getElementById("discountRow").classList.remove("hidden");
+  document.getElementById("orderDiscount").innerText =
+    `-₺${discount.toFixed(2)}`;
+}
+
+
+document.getElementById("orderShipping").innerText =
+  lastOrder.shipping === 0 ? "Ücretsiz" : `₺${lastOrder.shipping.toFixed(2)}`;
+
+document.getElementById("orderTotal").innerText =
+  `₺${lastOrder.total.toFixed(2)}`;
+
+
+
+// 📍 Adres
+const addr = lastOrder.address;
+document.getElementById("orderAddress").innerHTML = `
+  ${addr.title}<br>
+  ${addr.detail}<br>
+  ${addr.phone}
+`;
+
+// Sipariş gösterildikten sonra tekrar kullanılmasın
+window.addEventListener("beforeunload", () => {
+  localStorage.removeItem("lastOrder");
+});
+
+
+// 📦 Tahmini Teslimat Tarihi (bugün + 3 / 10 gün)
+const today = new Date();
+
+const minDelivery = new Date(today);
+minDelivery.setDate(today.getDate() + 3);
+
+const maxDelivery = new Date(today);
+maxDelivery.setDate(today.getDate() + 10);
+
+const formatDate = (date) => {
+  return date.toLocaleDateString("tr-TR", {
+    day: "numeric",
+    month: "long"
+  });
+};
+
+document.getElementById("deliveryDate").innerText =
+  `${formatDate(minDelivery)} - ${formatDate(maxDelivery)}`;
+
+  // 💳 Ödeme Bilgisi
+const payment = lastOrder.payment;
+
+if (payment) {
+  document.getElementById("paymentInfo").innerText =
+    `${payment.type} ile biten: •••• ${payment.last4}`;
+} else {
+  document.getElementById("paymentInfo").innerText =
+    "Ödeme bilgisi mevcut değil";
+}
+
+// 🖨️ Fatura Yazdır
+document.getElementById("printInvoiceBtn").addEventListener("click", () => {
+  window.print();
+});
+
+
+</script>
+
+
+</body></html>

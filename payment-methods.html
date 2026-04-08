@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BagVerse - My Payment Methods</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-10 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
+<div class="container mx-auto px-4">
+<div class="flex h-16 items-center justify-between">
+<a href="index.html" class="flex items-center gap-3 text-slate-900 dark:text-slate-50">
+  <div class="size-6 text-primary">
+    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_6_535)">
+        <path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_6_535">
+          <rect fill="white" width="48" height="48"></rect>
+        </clipPath>
+      </defs>
+    </svg>
+  </div>
+  <h2 class="text-lg font-bold tracking-[-0.015em]">BAGVERSE</h2>
+</a>
+
+<div class="hidden items-center gap-8 text-sm font-medium lg:flex">
+<a class="text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html">Anasayfa</a>
+<a class="text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="products.html">Ürünler</a>
+<a class="text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="contact.html">İletişim</a>
+<a class="text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about-us.html">Hakkımızda</a>
+</div>
+<div class="flex items-center gap-3">
+<a href="cart.html">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+</button> </a>
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="User avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA8kdWXwxcf8hP2bwb76brBLqWOUHGdzSkM7xATU12BvmXlUGvNpGPQVXwoU3CmXhe3WlaN0TqacT63WS3jdee8ks5JrPj5Fldu15DDzpm6dc_VaBoUmWN3vJzG7pTGhxPL19DwBPoBFO75YiqFuJmi1TuIpvnJmmZYbvZCLtfglj5JOq08mMzTuJNuouYXCD89ExUy2TgtJYbDSALSoTMUExfmQMVJlMOnD4pXIcqEc99KCZ3pahJS-6VSZIPi4RfK_iaBzUPKS_0");'></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1">
+<div class="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
+<div class="flex flex-col gap-8">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap items-center gap-2">
+<a class="text-sm font-medium text-primary hover:underline" href="profile.html">Hesabım</a>
+<span class="text-sm font-medium text-slate-400 dark:text-slate-500">/</span>
+<span class="text-sm font-medium text-slate-800 dark:text-slate-200">Ödeme Yöntemlerim</span>
+</div>
+<!-- Page Heading & Action -->
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<h1 class="text-3xl font-black tracking-tighter text-slate-900 dark:text-slate-50">Ödeme Yöntemlerim</h1>
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">lock</span>
+</div>
+<p class="text-base font-normal text-slate-600 dark:text-slate-400">Daha hızlı ödeme için kayıtlı ödeme seçeneklerinizi yönetin, ekleyin veya kaldırın.</p>
+</div>
+<a href="add-payment-method.html">
+<button class="flex h-10 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold leading-normal tracking-wide text-white shadow-sm transition-colors hover:bg-primary/90">
+<span class="material-symbols-outlined text-base">add_card</span>
+<span class="truncate">Yeni Ödeme Yöntemi Ekle</span>
+</button></a>
+</div>
+<!-- Payment Methods List -->
+<div id="paymentList" class="flex flex-col gap-4">
+
+
+<!-- Empty State (Example) -->
+<!-- 
+                    <div class="flex flex-col items-center justify-center gap-6 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 py-16 text-center">
+                        <div class="rounded-full bg-slate-100 p-4 dark:bg-slate-800">
+                            <span class="material-symbols-outlined text-4xl text-slate-500 dark:text-slate-400">credit_card_off</span>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <h3 class="text-xl font-semibold text-slate-800 dark:text-slate-200">No payment methods saved</h3>
+                            <p class="text-slate-600 dark:text-slate-400">Add a payment method to get started with faster checkouts.</p>
+                        </div>
+                        <button class="flex h-10 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold leading-normal tracking-wide text-white shadow-sm transition-colors hover:bg-primary/90">
+                            <span class="material-symbols-outlined text-base">add_card</span>
+                            <span class="truncate">Add a Payment Method</span>
+                        </button>
+                    </div> 
+                    -->
+</div>
+</div>
+</main>
+</div>
+
+<script>
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+const allPayments = JSON.parse(localStorage.getItem("paymentMethods")) || [];
+
+const paymentList = document.getElementById("paymentList");
+
+const userPayments = allPayments.filter(
+  card => card.userEmail === currentUser.email
+);
+
+if (userPayments.length === 0) {
+  paymentList.innerHTML = `
+    <div class="flex flex-col items-center justify-center gap-6 rounded-xl border border-dashed border-slate-300 py-16 text-center">
+      <span class="material-symbols-outlined text-4xl text-slate-400">credit_card_off</span>
+      <p class="text-slate-500">Kayıtlı ödeme yönteminiz yok</p>
+    </div>
+  `;
+} else {
+  paymentList.innerHTML = "";
+
+  userPayments.forEach(card => {
+    paymentList.innerHTML += `
+      <div class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
+        
+        <div class="flex flex-col">
+          <p class="font-semibold">${card.type} •••• ${card.last4}</p>
+          <p class="text-sm text-slate-500">Son Kullanma: ${card.expiry}</p>
+          <p class="text-sm text-slate-500">Kart Sahibi: ${card.name}</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          ${card.isDefault ? `<span class="text-xs text-primary font-semibold mr-2">DEFAULT</span>` : ""}
+
+          <button
+            onclick="editCard(${card.id})"
+            class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100"
+            title="Düzenle"
+          >
+            <span class="material-symbols-outlined text-lg">edit</span>
+          </button>
+
+          <button
+            onclick="deleteCard(${card.id})"
+            class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-red-500 hover:bg-red-50"
+            title="Sil"
+          >
+            <span class="material-symbols-outlined text-lg">delete</span>
+          </button>
+        </div>
+
+      </div>
+    `;
+  });
+}
+
+function deleteCard(cardId) {
+  const paymentMethods =
+    JSON.parse(localStorage.getItem("paymentMethods")) || [];
+
+  const updated = paymentMethods.filter(card => card.id !== cardId);
+  localStorage.setItem("paymentMethods", JSON.stringify(updated));
+  location.reload();
+}
+
+function editCard(cardId) {
+  window.location.href = `edit-payment-method.html?id=${cardId}`;
+}
+
+</script>
+
+
+
+</body></html>

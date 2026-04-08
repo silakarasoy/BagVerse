@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yeni Adres Ekle - BagVerse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- TopNavBar Component -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-700/80 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm">
+<div class="container mx-auto flex items-center justify-between px-4 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-slate-900 dark:text-white">
+  <div class="flex size-8 items-center justify-center rounded-lg bg-primary text-white">
+    <span class="material-symbols-outlined text-xl">local_mall</span>
+  </div>
+  <a href="index.html" class="text-lg font-bold tracking-[-0.015em]">BagVerse</a>
+</div>
+<div class="hidden items-center gap-8 md:flex">
+<a class="text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html">Anasayfa</a>
+<a class="text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="products.html">Ürünler</a>
+<a class="text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="contact.html">İletişim</a>
+<a class="text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about-us.html">Hakkımızda</a>
+</div>
+</div>
+<div class="flex flex-1 items-center justify-end gap-4">
+<label class="hidden lg:block">
+<div class="relative flex h-10 w-full max-w-xs items-stretch">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input block w-full rounded-lg border-slate-300 bg-slate-100 pl-10 text-sm text-slate-900 placeholder:text-slate-500 focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50 dark:placeholder:text-slate-400" placeholder="Search bags..." type="search"/>
+</div>
+</label>
+<div class="flex items-center gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-lg border border-transparent text-slate-600 hover:bg-slate-200/60 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-700/60 dark:hover:text-slate-50">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-lg border border-transparent text-slate-600 hover:bg-slate-200/60 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-700/60 dark:hover:text-slate-50">
+<span class="material-symbols-outlined text-2xl">shopping_bag</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC7Pt-JHay-56CfzquBZPxtqaAjaLsVaPrZxIoKxjytOYGpMHlf3E4-woshmjwlQPNcypFpHZ4upDz9M-34p8Ou2DWfd_RT8uKPb2wwVmCO1tCcD0DYQRiTiJ85vosJPJuLypNH5it5tX4Gwnv-MttKsyL7hxkY3aEfuLj6utPLMgmPWONJRSJAc5yY1N0KHmd9GhiNWfmqcAda2XWyxe-dhwcsjQLxtnUU9MZcrw6h70mxwSXSIuCwsVc_itEk5veKW4csbpVc05k");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="w-full flex-1 px-4 py-12 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-3xl">
+<!-- PageHeading Component -->
+<div class="mb-8 text-center">
+<h1 class="text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white">Yeni Adres Ekle</h1>
+<p class="mt-2 text-base font-normal leading-normal text-slate-600 dark:text-slate-400">Teslimat için kullanılacak yeni bir adres bilgisi girin.</p>
+</div>
+<!-- Form Container -->
+<div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:p-8">
+<form id="addressForm" class="space-y-6">
+<div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
+<!-- Ad (Name) -->
+
+<label class="flex flex-col">
+<p class="pb-2 text-base font-medium text-slate-800 dark:text-slate-200">Ad</p>
+<input id="name" class="form-input flex w-full flex-1 rounded-lg border border-slate-300 bg-transparent py-3 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-50 dark:placeholder:text-slate-500" placeholder="Adınızı girin" value=""/>
+</label>
+<!-- Soyad (Surname) -->
+<label class="flex flex-col">
+<p class="pb-2 text-base font-medium text-slate-800 dark:text-slate-200">Soyad</p>
+<input  id="surname" class=" flex w-full flex-1 rounded-lg border border-slate-300 bg-transparent py-3 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-50 dark:placeholder:text-slate-500" placeholder="Soyadınızı girin" value=""/>
+</label>
+<!-- Telefon Numarası (Phone Number) -->
+<label class="flex flex-col sm:col-span-2">
+<p class="pb-2 text-base font-medium text-slate-800 dark:text-slate-200">Telefon Numarası</p>
+<input id="phone"  type="tel" class="form-input flex w-full flex-1 rounded-lg border border-slate-300 bg-transparent py-3 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-50 dark:placeholder:text-slate-500" placeholder="555 123 4567" type="tel" value=""/>
+</label>
+<!-- Adres Satırı 1 (Address Line 1) -->
+<label class="flex flex-col sm:col-span-2">
+<p class="pb-2 text-base font-medium text-slate-800 dark:text-slate-200">Adres Satırı 1</p>
+<input  id="address1" class="form-input flex w-full flex-1 rounded-lg border border-slate-300 bg-transparent py-3 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-50 dark:placeholder:text-slate-500" placeholder="Mahalle, sokak ve kapı no girin" value=""/>
+</label>
+<!-- Adres Satırı 2 (Address Line 2) -->
+<label class="flex flex-col sm:col-span-2">
+<p class="pb-2 text-base font-medium text-slate-800 dark:text-slate-200">Adres Satırı 2 <span class="text-sm text-slate-500 dark:text-slate-400">(İsteğe Bağlı)</span></p>
+<input id="address2" class="form-input flex w-full flex-1 rounded-lg border border-slate-300 bg-transparent py-3 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-50 dark:placeholder:text-slate-500" placeholder="Bina adı, daire no vb." value=""/>
+</label>
+<!-- Ülke (Country) -->
+<label class="flex flex-col sm:col-span-2">
+<p class="pb-2 text-base font-medium text-slate-800 dark:text-slate-200">Ülke</p>
+<select class="form-select flex w-full flex-1 rounded-lg border border-slate-300 bg-transparent py-3 px-4 text-slate-900 focus:border-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-50">
+<option>Türkiye</option>
+<option>Almanya</option>
+<option>Fransa</option>
+<option>Birleşik Krallık</option>
+</select>
+</label>
+<!-- Şehir, İlçe, Posta Kodu Grid -->
+<div class="sm:col-span-2">
+<div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-3">
+<!-- Şehir (City) -->
+<label class="flex flex-col">
+<p class="pb-2 text-base font-medium text-slate-800 dark:text-slate-200">Şehir</p>
+<input id="city" class="form-input flex w-full flex-1 rounded-lg border border-slate-300 bg-transparent py-3 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-50 dark:placeholder:text-slate-500" placeholder="İstanbul" value=""/>
+</label>
+<!-- İlçe (District) -->
+<label class="flex flex-col">
+<p class="pb-2 text-base font-medium text-slate-800 dark:text-slate-200">İlçe</p>
+<input  id="district" class="form-input flex w-full flex-1 rounded-lg border border-slate-300 bg-transparent py-3 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-50 dark:placeholder:text-slate-500" placeholder="Kadıköy" value=""/>
+</label>
+<!-- Posta Kodu (Postal Code) -->
+<label class="flex flex-col">
+<p class="pb-2 text-base font-medium text-slate-800 dark:text-slate-200">Posta Kodu</p>
+<input id="postalCod" class="form-input flex w-full flex-1 rounded-lg border border-slate-300 bg-transparent py-3 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-50 dark:placeholder:text-slate-500" placeholder="34710" value=""/>
+</label>
+</div>
+</div>
+</div>
+<!-- Checkbox -->
+<div class="relative flex items-start pt-2">
+  <div class="flex h-6 items-center">
+    <input id="isDefault" name="isDefault" type="checkbox" class="form-checkbox size-4 rounded border-slate-400 text-primary focus:ring-primary dark:border-slate-500 dark:bg-slate-700"/>
+  </div>
+  <div class="ml-3 text-sm leading-6">
+    <label class="font-medium text-slate-700 dark:text-slate-300" for="isDefault">Bu adresi varsayılan teslimat adresi olarak ayarla</label>
+  </div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center justify-end gap-4 border-t border-slate-200 pt-6 dark:border-slate-700">
+<a
+  href="profile-address.html"
+  class="flex cursor-pointer items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold text-slate-700 ring-1 ring-inset ring-slate-300 hover:bg-slate-100 dark:text-slate-200 dark:ring-slate-600 dark:hover:bg-slate-700">
+  İptal
+</a>
+<button class="flex cursor-pointer items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary/90" type="button" id="saveAddressBtn">Kaydet</button> 
+
+</div>
+</form>
+</div>
+</div>
+</main>
+</div>
+
+<script>
+
+    const editIndex = localStorage.getItem("editAddressIndex");
+  const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
+
+  if (editIndex !== null && addresses[editIndex]) {
+    const address = addresses[editIndex];
+
+    document.getElementById("name").value = address.name.split(" ")[0] || "";
+    document.getElementById("surname").value = address.name.split(" ")[1] || "";
+    document.getElementById("phone").value = address.phone || "";
+    document.getElementById("address1").value = address.address1 || "";
+    document.getElementById("address2").value = address.address2 || "";
+    document.getElementById("city").value = address.city || "";
+    document.getElementById("district").value = address.district || "";
+    document.getElementById("postalCod").value = address.postalCode || "";
+    document.getElementById("isDefault").checked = address.isDefault || false;
+  }
+  const form = document.getElementById("addressForm");
+
+ document.getElementById("saveAddressBtn").addEventListener("click", () => {
+
+  const newAddress = {
+    title: "Adresim",
+    name:
+      document.getElementById("name").value +
+      " " +
+      document.getElementById("surname").value,
+    phone: document.getElementById("phone").value,
+    detail: `
+      ${document.getElementById("address1").value}
+      ${document.getElementById("address2").value}
+      ${document.getElementById("district").value} /
+      ${document.getElementById("city").value}
+      ${document.getElementById("postalCod").value}
+    `,
+    isDefault: document.getElementById("isDefault").checked
+  };
+
+  const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
+
+  if (newAddress.isDefault) {
+    addresses.forEach(addr => addr.isDefault = false);
+  }
+
+  addresses.push(newAddress);
+  localStorage.setItem("addresses", JSON.stringify(addresses));
+
+  const fromCheckout =
+    new URLSearchParams(window.location.search).get("from") === "checkout";
+
+  window.location.href = fromCheckout
+    ? "checkout.html"
+    : "profile-address.html";
+});
+</script>
+
+
+
+</body></html>

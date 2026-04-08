@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BAGVERSE - Product Listing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" ></script>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#BF5739",
+            "background-light": "#F9F9F9",
+            "background-dark": "#1A1A1A",
+            "text-light": "#333333",
+            "text-dark": "#E0E0E0",
+            "border-light": "#E0E0E0",
+            "border-dark": "#333333",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"],
+            "serif": ["Lora", "serif"],
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+  /* Favori ikonu stilleri */
+  .favorite-icon {
+    color: #333333;
+    transition: color 200ms ease, transform 150ms ease;
+  }
+  
+ .favorite-icon.filled {
+  color: #BF5739;
+  transform: scale(1.1);
+  font-variation-settings: 'FILL' 1;
+}
+
+  .dark .favorite-icon {
+    color: #E0E0E0;
+  }
+  
+  .dark .favorite-icon.filled {
+    color: #BF5739;
+  }
+
+  /* Filtre renk butonları */
+  button.active {
+    outline: 2px solid #BF5739;
+    outline-offset: 2px;
+  }
+</style>
+<style>
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: #BF5739;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  width: 70%;
+  max-width: 900px;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+}
+
+.modal-body {
+  display: flex;
+  gap: 24px;
+}
+
+.modal-body img {
+  width: 300px;
+  border-radius: 8px;
+}
+
+#closeModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+</style>
+
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root">
+<header class="sticky top-0 z-40 w-full border-b border-border-light dark:border-border-dark bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-10">
+<a class="flex items-center gap-3" href="index.html">
+<svg class="h-6 w-6 text-text-light dark:text-text-dark" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+<h1 class="font-serif text-2xl font-bold tracking-tight text-text-light dark:text-text-dark">BAGVERSE</h1>
+</a>
+<nav class="hidden md:flex items-center gap-8">
+<a id="navNew" class="text-sm font-medium hover:text-primary dark:hover:text-primary transition-colors" href="#">Yeni Gelenler</a>
+<a id="navBags" class="text-sm font-medium hover:text-primary dark:hover:text-primary transition-colors" href="#">Çantalar</a>
+<a id="navCollections" class="text-sm font-medium hover:text-primary dark:hover:text-primary transition-colors" href="#">Koleksiyonlar</a>
+<a id="navOffers" class="text-sm font-medium hover:text-primary dark:hover:text-primary transition-colors" href="#">Fırsatlar</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<label class="hidden lg:flex flex-col relative w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-10">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400 absolute left-3 top-1/2 -translate-y-1/2">search</span>
+<input id="searchInput"
+ class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-gray-500/10 h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 pl-10 text-sm" placeholder="Search for bags..." value=""/>
+</div>
+</label>
+<div class="flex items-center gap-2">
+    <a href="favorites.html">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-transparent hover:bg-gray-500/10">
+<span class="material-symbols-outlined favorite-icon text-text-light dark:text-text-light">favorite_border</span></button> </a>
+<a href="cart.html">
+  <button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-transparent hover:bg-gray-500/10">
+    <span class="material-symbols-outlined text-text-light dark:text-text-dark">shopping_bag</span>
+  </button>
+</a>
+</button>
+</button>
+</button>
+<a href="profile.html">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-transparent hover:bg-gray-500/10">
+<span class="material-symbols-outlined text-text-light dark:text-text-dark">person</span>
+</button> </a>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-screen-2xl mx-auto px-6 lg:px-12 w-full py-8">
+<div class="flex flex-wrap gap-2 pb-8">
+<a class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal" href="index.html">Anasayfa</a>
+<span class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">/</span>
+<a class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal" href="products.html">Ürünler</a>
+<span class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">/</span>
+<span class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Tote Bags</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-8 xl:gap-12">
+<aside class="lg:col-span-1">
+  <div class="sticky top-28 space-y-8">
+    <div class="flex justify-between items-center">
+      <h3 class="text-lg font-bold font-serif leading-tight tracking-[-0.015em]">Filters</h3>
+      <button id="clearFilters" class="text-sm font-medium text-gray-500 hover:text-primary dark:hover:text-primary">Clear All</button>
+    </div>
+    <div class="space-y-6">
+      <!-- Bag Type -->
+      <details class="group" open="">
+        <summary class="flex justify-between items-center cursor-pointer list-none">
+          <span class="font-semibold">Bag Type</span>
+          <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180">expand_more</span>
+        </summary>
+        <div class="mt-4 space-y-3">
+          <label class="flex items-center space-x-3">
+            <input class="form-checkbox h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/50 filter" type="checkbox" value="Tote Bag" data-filter-group="type"/>
+            <span class="text-sm">Tote Bag</span>
+          </label>
+          <label class="flex items-center space-x-3">
+            <input class="form-checkbox h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/50 filter" type="checkbox" value="Crossbody" data-filter-group="type"/>
+            <span class="text-sm">Crossbody</span>
+          </label>
+          <label class="flex items-center space-x-3">
+            <input class="form-checkbox h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/50 filter" type="checkbox" value="Backpack" data-filter-group="type"/>
+            <span class="text-sm">Backpack</span>
+          </label>
+          <label class="flex items-center space-x-3">
+            <input class="form-checkbox h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/50 filter" type="checkbox" value="Clutch" data-filter-group="type"/>
+            <span class="text-sm">Clutch</span>
+          </label>
+           <label class="flex items-center space-x-3">
+            <input class="form-checkbox h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/50 filter" type="checkbox" value="Wallet" data-filter-group="type"/>
+            <span class="text-sm">Wallet</span>
+          </label>
+        </div>
+      </details>
+      <hr class="border-border-light dark:border-border-dark"/>
+      <!-- Brand -->
+      <details class="group" open="">
+        <summary class="flex justify-between items-center cursor-pointer list-none">
+          <span class="font-semibold">Brand</span>
+          <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180">expand_more</span>
+        </summary>
+        <div class="mt-4 space-y-3">
+          <label class="flex items-center space-x-3">
+            <input class="form-checkbox h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/50 filter" type="checkbox" value="Aura" data-filter-group="brand"/>
+            <span class="text-sm">Aura</span>
+          </label>
+          <label class="flex items-center space-x-3">
+            <input class="form-checkbox h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/50 filter" type="checkbox" value="Vogue" data-filter-group="brand"/>
+            <span class="text-sm">Vogue</span>
+          </label>
+          <label class="flex items-center space-x-3">
+            <input class="form-checkbox h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/50 filter" type="checkbox" value="Chic" data-filter-group="brand"/>
+            <span class="text-sm">Chic</span>
+          </label>
+           <label class="flex items-center space-x-3">
+            <input class="form-checkbox h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/50 filter" type="checkbox" value="Vesper" data-filter-group="brand"/>
+            <span class="text-sm">Vesper</span>
+          </label>
+          <label class="flex items-center space-x-3">
+            <input class="form-checkbox h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/50 filter" type="checkbox" value="Solis" data-filter-group="brand"/>
+            <span class="text-sm">Solis</span>
+          </label>
+        </div>
+      
+         
+      </details>
+      <hr class="border-border-light dark:border-border-dark"/>
+
+      <!-- Price Range -->
+<details class="group" open>
+  <summary class="flex justify-between items-center cursor-pointer list-none">
+    <span class="font-semibold">Price</span>
+    <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180">
+      expand_more
+    </span>
+  </summary>
+
+  <div class="mt-4 space-y-3">
+    <div class="flex items-center gap-2">
+      <input
+        type="number"
+        id="minPrice"
+        placeholder="Min"
+        class="w-1/2 form-input rounded-lg text-sm"
+      />
+      <input
+        type="number"
+        id="maxPrice"
+        placeholder="Max"
+        class="w-1/2 form-input rounded-lg text-sm"
+      />
+    </div>
+  </div>
+</details>
+
+<hr class="border-border-light dark:border-border-dark"/>
+
+      <!-- Color -->
+      <details class="group" open="">
+        <summary class="flex justify-between items-center cursor-pointer list-none">
+          <span class="font-semibold">Color</span>
+          <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180">expand_more</span>
+        </summary>
+        <div class="mt-4 flex flex-wrap gap-3">
+<button
+  data-filter-group="color"
+  data-value="black"
+  class="h-6 w-6 rounded-full bg-black ">
+</button>
+<button
+  data-filter-group="color"
+  data-value="white"
+  class="h-6 w-6 rounded-full bg-white border border-border-light dark:border-border-dark">
+</button>
+<button
+  data-filter-group="color"
+  data-value="brown"
+  class="h-6 w-6 rounded-full bg-amber-800">
+</button>
+<button
+  data-filter-group="color"
+  data-value="beige"
+  class="h-6 w-6 rounded-full 
+         bg-[#F1E4D3] 
+         border border-border-light
+         ">
+</button>
+<button
+  data-filter-group="color"
+  data-value="navy"
+  class="h-6 w-6 rounded-full bg-slate-900">
+</button>
+<button
+  data-filter-group="color"
+  data-value="gray"
+  class="h-6 w-6 rounded-full bg-gray-400">
+</button>
+<button
+  data-filter-group="color"
+  data-value="green"
+  class="h-6 w-6 rounded-full bg-green-700">
+</button>
+        </div>
+      </details>
+    </div>
+    <button id="applyFilters" class="flex w-full cursor-pointer items-center justify-center rounded-lg h-11 px-4 bg-primary text-white text-sm font-bold hover:opacity-90">
+      Apply Filters
+    </button>
+  </div>
+</aside>
+<div class="lg:col-span-3">
+<section class="mb-12">
+<h2 class="text-3xl font-bold font-serif leading-tight tracking-tight mb-6">En Çok Satanlar</h2>
+<div class="flex overflow-x-auto pb-4 [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden -mx-6 lg:-mx-12 px-6 lg:px-12">
+<div class="flex items-stretch gap-6">
+<div class="product-card flex w-72 flex-shrink-0 flex-col gap-4 rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"
+     data-id="1"
+     data-name="Classic Tote"
+     data-price="1200"
+     data-type="Tote Bag"
+     data-brand="Aura"
+     data-color="black"
+     data-sale="true"
+     data-description="Günlük yaşamınızın her anında size eşlik edecek zarif ve işlevsel bir tasarım. Classic Tote, birinci sınıf suni deriden üretilmiştir ve geniş iç hacmiyle laptop, kitap ve kişisel eşyalarınızı düzenli bir şekilde taşımanızı sağlar. Dayanıklı askıları ve şık metal detaylarıyla stilinizi tamamlar."
+     data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuCndZk16BEYviWZHF_Eut3W7LlGd2FbYFtbDfw4JSLz-tMebadZERFEXVdqgxE4ezu6mbs5GK9tE9O7YHPXROaZuvt8Vo1R6MMSkOZAywLV0C6H4SOXJFXc6oLtqjgiN5hWNwFEaTnFym_MoM87QLz5r9ziEXdAJ7ndvlxMWPl4eGdxZUR5-5eoABCdR28KWlMYwhaRkN2XTuf4jxW2T-2HmtXxk66zeSNLPOVACtHhuMbRrSgtLAvZ8db61iQShzBjqLxe9Qp7yyw">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-t-xl flex flex-col" data-alt="A classic black tote bag" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCndZk16BEYviWZHF_Eut3W7LlGd2FbYFtbDfw4JSLz-tMebadZERFEXVdqgxE4ezu6mbs5GK9tE9O7YHPXROaZuvt8Vo1R6MMSkOZAywLV0C6H4SOXJFXc6oLtqjgiN5hWNwFEaTnFym_MoM87QLz5r9ziEXdAJ7ndvlxMWPl4eGdxZUR5-5eoABCdR28KWlMYwhaRkN2XTuf4jxW2T-2HmtXxk66zeSNLPOVACtHhuMbRrSgtLAvZ8db61iQShzBjqLxe9Qp7yyw");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Classic Tote </p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺1200</p>
+</div>
+<button class=" addToCart flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+<div class="product-card flex w-72 flex-shrink-0 flex-col gap-4 rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"  
+     data-id="2"
+     data-name="Urban Crossbody"
+     data-price="850"
+     data-type="Crossbody" 
+     data-brand="Aura"
+     data-color="gray"
+     data-new="true"
+     data-description="Şehir hayatının dinamizmine ayak uydurmak için tasarlandı. Şık, dayanıklı ve fonksiyonel Urban Crossbody, günlük ihtiyaçlarınızı taşırken stilinizi tamamlar. Suya dayanıklı kumaşı ve ayarlanabilir askısı ile her mevsim ve her boy için idealdir. Minimalist tasarım anlayışı ile modern gardırobunuzun vazgeçilmezi olacak."
+     data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuAEfsaJOeCQNkASPrSAarPiplW-484FXIitvrRqOGrkx9HgKubXabFjrMzWyECU8-te1E6YsR0a4xqbFQpdpZJEEwxDEHr9IEM7AdVV4n3UV66zm84PT3Sq3kngOahPh8_JHExvjj-5lMF4ICgs_xWMoKEHr5wsIhG2ifGsFr9xdFfGM84L9Hw_DPKyQd0ENB8tCWglVq-rYyIFMBWqze3bQ3fv2FDJS7s5d1b9-CUW_ZdRVE4SznmUmpGcnGkffS9KTzfOlb-yxa0">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-t-xl flex flex-col" data-alt="A stylish urban crossbody bag" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAEfsaJOeCQNkASPrSAarPiplW-484FXIitvrRqOGrkx9HgKubXabFjrMzWyECU8-te1E6YsR0a4xqbFQpdpZJEEwxDEHr9IEM7AdVV4n3UV66zm84PT3Sq3kngOahPh8_JHExvjj-5lMF4ICgs_xWMoKEHr5wsIhG2ifGsFr9xdFfGM84L9Hw_DPKyQd0ENB8tCWglVq-rYyIFMBWqze3bQ3fv2FDJS7s5d1b9-CUW_ZdRVE4SznmUmpGcnGkffS9KTzfOlb-yxa0");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Urban Crossbody</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺850</p>
+</div>
+<button class="addToCart flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+<div class="product-card flex w-72 flex-shrink-0 flex-col gap-4 rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"   
+     data-id="3"
+     data-name="Adventure Backpack"
+     data-price="1500"
+     data-type="Backpack"
+      data-brand="Vogue"
+      data-color="green"
+      data-sale="true"
+      data-description="Maceracı ruhlar için tasarlanan Adventure Backpack, hem şehir içi kullanım hem de doğa yürüyüşleri için idealdir. Su geçirmez kumaşı, ergonomik omuz askıları ve geniş iç hacmi ile tüm ihtiyaçlarınızı yanınızda taşıyabilirsiniz. 15 inç laptop bölmesi ve çoklu cepleri ile eşyalarınızı düzenli tutmanıza yardımcı olur."
+      data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuBbFVmcusLr2KxMrKBPDNrFu_EhhBuiC0PWb3SHCxvV8Z1i7wzbFFM2HhDw5nYLSdLMzB6ziToX82Yx1Pz0LgkSC8utlEGxOmwgV-Jb1olZq2bwBjbc7Y8rOTc7pv4WWRQXMjz8zrMWGEk5evQdJMI74Fhh3_VaHnfjVFoUR4c7lqrtmv-V5sD3SImBDF1U7La1SWK62kdoa6ZGNNrwFUh9WQbYy6uSUdSMBqQQE91s-k_lCOCflOa0zSgrVOPYKt-llFiPpKaXy3I">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-t-xl flex flex-col" data-alt="A rugged adventure backpack" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBbFVmcusLr2KxMrKBPDNrFu_EhhBuiC0PWb3SHCxvV8Z1i7wzbFFM2HhDw5nYLSdLMzB6ziToX82Yx1Pz0LgkSC8utlEGxOmwgV-Jb1olZq2bwBjbc7Y8rOTc7pv4WWRQXMjz8zrMWGEk5evQdJMI74Fhh3_VaHnfjVFoUR4c7lqrtmv-V5sD3SImBDF1U7La1SWK62kdoa6ZGNNrwFUh9WQbYy6uSUdSMBqQQE91s-k_lCOCflOa0zSgrVOPYKt-llFiPpKaXy3I");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Adventure Backpack</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺1500</p>
+</div>
+<button class="addToCart flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+<div class="flex w-72 flex-shrink-0 flex-col gap-4 rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"  
+     data-id="4"
+     data-name="Evening Clutch"
+     data-price="950"
+     data-type="Clutch"
+      data-brand="Chic"
+      data-color="black"
+      data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuB93TCpvezKuTFSmA4-l28AN045CUoQmwVfSjknN6B1yig-hIxQ1zyRIvyMrWIdV4lf1VT21pgDs9gN6Ti1x_ZsH_9zZ-NVTbUtdJYOqJKHkEBKMhYlDMTM9pcPgf5a3ZpeA7lp2ZEnbIyepcYJ20KSzPQ3AzQI6Ps1Z57d-glpoFNFRnswhMLMZKNhN7lkjZcCII6YKO0Osz0DahHWxO8zP-KAS5-HD1w1Lf2eEktSC13y1trzrfjr7ld6b7ELMsKEGZOLvB75P7c">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-t-xl flex flex-col" data-alt="A small leather clutch for evenings" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB93TCpvezKuTFSmA4-l28AN045CUoQmwVfSjknN6B1yig-hIxQ1zyRIvyMrWIdV4lf1VT21pgDs9gN6Ti1x_ZsH_9zZ-NVTbUtdJYOqJKHkEBKMhYlDMTM9pcPgf5a3ZpeA7lp2ZEnbIyepcYJ20KSzPQ3AzQI6Ps1Z57d-glpoFNFRnswhMLMZKNhN7lkjZcCII6YKO0Osz0DahHWxO8zP-KAS5-HD1w1Lf2eEktSC13y1trzrfjr7ld6b7ELMsKEGZOLvB75P7c");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Evening Clutch</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺950</p>
+</div>
+<button class="addToCart flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90"">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-3xl font-bold font-serif leading-tight tracking-tight">Tote Bags</h2>
+<div class="flex items-center gap-2">
+<label class="text-sm font-medium text-gray-500 dark:text-gray-400" for="sort">Sort by:</label>
+<select class="form-select rounded-lg border-border-light dark:border-border-dark bg-transparent text-sm focus:ring-primary/50 focus:border-primary/50 pr-8" id="sort">
+<option>Popularity</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Newest</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+<div class="product-card group relative flex w-full flex-col overflow-hidden rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"
+     data-id="5"
+     data-name="Leather Tote"
+     data-price="1800"
+     data-type="Tote Bag"
+     data-brand="Aura"
+     data-color="brown"
+     data-description="Zamansız zarafeti modern işlevsellikle birleştiren bu şık deri çanta ile tarzınızı yükseltin. En iyi deriden üretilmiş olup, geniş iç kısmı ve düşünülmüş bölmeleri ile günlük temel ihtiyaçlarınızı zahmetsizce taşımanızı sağlar."
+     data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuDD40hEVcYKVFoUfTubgnoTfx26gnHpl_dBR0qFy5PZc4SBDNIIvdoUUvdVlINuUjy9asmt60o1KV8UpQAi8kA4jF-iyHxJtZMFajNBNL9CjGJjhzgcQZbK90xbcFIvxNVCxtYdE6Hq11Ab9BFEjF4kSIlHqksY3Ng76qygmlHA_7jhtBHzet21Yg27f9Xc5ZAOCLfeMuV07_uOTgBh_BqJ5YucgkJS2EP8d1N14SBmVTzV45divJig_du2IOMKokXTZwltUgazUTk">
+<div class="relative">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover" data-alt="Elegant leather tote bag in brown" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDD40hEVcYKVFoUfTubgnoTfx26gnHpl_dBR0qFy5PZc4SBDNIIvdoUUvdVlINuUjy9asmt60o1KV8UpQAi8kA4jF-iyHxJtZMFajNBNL9CjGJjhzgcQZbK90xbcFIvxNVCxtYdE6Hq11Ab9BFEjF4kSIlHqksY3Ng76qygmlHA_7jhtBHzet21Yg27f9Xc5ZAOCLfeMuV07_uOTgBh_BqJ5YucgkJS2EP8d1N14SBmVTzV45divJig_du2IOMKokXTZwltUgazUTk");'></div>
+<button class="favorite-btn absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-background-light/70 dark:bg-background-dark/70 backdrop-blur-sm transition hover:bg-primary/20" >
+<span class="material-symbols-outlined favorite-icon text-text-light dark:text-text-dark group-hover:text-primary">favorite_border</span>
+</button>
+</div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Leather Tote</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺1800</p>
+</div>
+<button class="addToCart flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary text-sm font-bold leading-normal tracking-[0.015em] transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+<div class="product-card group relative flex w-full flex-col overflow-hidden rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"
+     data-id="6"
+     data-name="Luna Tote"
+     data-price="1650"
+     data-type="Tote Bag"
+     data-brand="Aura"
+     data-color="white"
+  data-description="Luna Tote ile zarafet işlevsellikle buluşuyor. Modern şehir hayatının temposuna ayak uydurmak için tasarlanan bu çanta, geniş iç hacmi ve sofistike detaylarıyla her an yanınızda. %100 el yapımı vegan deri kullanımı, çevreye duyarlı şıklığı garanti eder."
+
+     data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuA_5wK0EyluyRIIYulQbqdbvbIFebHdPdeRoHE-SWcxCPSuOb088vaYf9nGDr6R5Ev2Kx-7WRben-exzZaE3YkV17xATsq7MVfGno3mc0sxgtcPbap7UBLDQsSytAM-zmD6StyAviy3FhmPwmeH5DRH4uOrTzCR0adkDGm5hyesMwdtXmkcuvZAtTwhBYpyByPexFz4RzLmBeIWcrKbW42lDStHwzcPFp9socaKXqu86L2d1ojRDKX4aLt2B40tp2wlS8E96gDxwF0">
+<div class="relative">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover" data-alt="Minimalist canvas tote bag" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA_5wK0EyluyRIIYulQbqdbvbIFebHdPdeRoHE-SWcxCPSuOb088vaYf9nGDr6R5Ev2Kx-7WRben-exzZaE3YkV17xATsq7MVfGno3mc0sxgtcPbap7UBLDQsSytAM-zmD6StyAviy3FhmPwmeH5DRH4uOrTzCR0adkDGm5hyesMwdtXmkcuvZAtTwhBYpyByPexFz4RzLmBeIWcrKbW42lDStHwzcPFp9socaKXqu86L2d1ojRDKX4aLt2B40tp2wlS8E96gDxwF0");'></div>
+<button class="favorite-btn absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-background-light/70 dark:bg-background-dark/70 backdrop-blur-sm transition hover:bg-primary/20" >
+<span class="material-symbols-outlined favorite-icon text-text-light dark:text-text-dark group-hover:text-primary">favorite_border</span>
+</button>
+</div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Luna Tote</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺1650</p>
+</div>
+<button class="addToCart flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary text-sm font-bold leading-normal tracking-[0.015em] transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+<div class="product-card group relative flex w-full flex-col overflow-hidden rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"
+     data-id="7"
+     data-name="Aria Clutch"
+     data-price="1950"
+      data-type="Clutch"
+      data-brand="Vogue"
+      data-color="beige"
+            data-description="Modern zarafetin simgesi Aria Clutch, yumuşak dokulu premium vegan deriden el işçiliğiyle üretilmiştir. Gece davetlerinden gündüz şıklığına zahmetsizce geçiş yapmanızı sağlayan minimalist tasarımı, geniş iç hacmi ile fonksiyonelliği estetikle buluşturur. Altın rengi metal detayları ve çıkarılabilir zincir askısı ile stilinize ışıltı katın."
+
+      data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuA3VU9SmTQNOFRFmIv_SyVyhhbvdkfI4xHNwPC3ooAJbBBSP24etk8S75ua8IPQUKXHPtvYRrB0715i-6wfpALEGIJVZnZ9peU1YXdOAdoZZMShsX7diuJPaoR1UpSwPasB0dttMfi9_vI33d9ThMrAwAQHXdEao7v42Uu9McPBD-jHSVkY8XlEYCO10gKAubQ8J2fK3uPHE6W1gIl9YVLqzpP6kqLu4xYDdNum91HaupG06wMmWXaRltm_H0rHUDQbOACrdd1aHDI">
+<div class="relative">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover" data-alt="A summer-themed straw tote bag" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA3VU9SmTQNOFRFmIv_SyVyhhbvdkfI4xHNwPC3ooAJbBBSP24etk8S75ua8IPQUKXHPtvYRrB0715i-6wfpALEGIJVZnZ9peU1YXdOAdoZZMShsX7diuJPaoR1UpSwPasB0dttMfi9_vI33d9ThMrAwAQHXdEao7v42Uu9McPBD-jHSVkY8XlEYCO10gKAubQ8J2fK3uPHE6W1gIl9YVLqzpP6kqLu4xYDdNum91HaupG06wMmWXaRltm_H0rHUDQbOACrdd1aHDI");'></div>
+<button class="favorite-btn absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-background-light/70 dark:bg-background-dark/70 backdrop-blur-sm transition hover:bg-primary/20" >
+<span class="material-symbols-outlined favorite-icon text-primary active">favorite_border</span>
+</button>
+</div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Aria Clutch</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺1950</p>
+</div>
+<button class="addToCart flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary text-sm font-bold leading-normal tracking-[0.015em] transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+<div class="product-card group relative flex w-full flex-col overflow-hidden rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"
+     data-id="8"
+     data-name="Nylon Utility Bag"
+     data-price="1100"
+     data-type="Tote Bag"
+      data-brand="Chic"
+      data-color="black"
+            data-description="Modern yaşamın temposuna ayak uydurmak için tasarlanan Nylon Utility Bag, hafif yapısı ve çoklu bölmeleriyle gün boyu konfor sunar. Dayanıklı ve su itici naylon kumaştan üretilmiştir. Ayarlanabilir omuz askısı sayesinde çapraz veya omuzda taşınabilir. İster günlük kullanımda, ister seyahatlerinizde vazgeçilmez bir parçanız olacak."
+
+      data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuB1hXzGqQF-iWvb2b5JOzExhZWNgPgRntzV0cG5-dASMkU5q5umYin10XTDzbnsDHp79UTeEe8kLB7V9MA0cOebRuhduWxszzYe51JXeE7upQygnUdeS8urS8elbbtcFssiNZvMqbFkhz9OsH7DFaEnBMEtW2Astv3Gjyme5GNHAhaInZqMGQhjE0iVTzw9av4JUn_YK_P7Zz9sEji9XCaQvxRv_Vot1j7IVHfDLL8tGbNTx5UQwA_Rwa3w8wxgPpw9QX_DWs7Pr40">
+<div class="relative">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover" data-alt="A modern nylon crossbody bag" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB1hXzGqQF-iWvb2b5JOzExhZWNgPgRntzV0cG5-dASMkU5q5umYin10XTDzbnsDHp79UTeEe8kLB7V9MA0cOebRuhduWxszzYe51JXeE7upQygnUdeS8urS8elbbtcFssiNZvMqbFkhz9OsH7DFaEnBMEtW2Astv3Gjyme5GNHAhaInZqMGQhjE0iVTzw9av4JUn_YK_P7Zz9sEji9XCaQvxRv_Vot1j7IVHfDLL8tGbNTx5UQwA_Rwa3w8wxgPpw9QX_DWs7Pr40");'></div>
+<button class="favorite-btn absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-background-light/70 dark:bg-background-dark/70 backdrop-blur-sm transition hover:bg-primary/20">
+<span class="material-symbols-outlined favorite-icon text-text-light dark:text-text-dark group-hover:text-primary">favorite_border</span>
+</button>
+</div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Nylon Utility Bag</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺1100</p>
+</div>
+<button class="addToCart flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary text-sm font-bold leading-normal tracking-[0.015em] transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+<div class="product-card group relative flex w-full flex-col overflow-hidden rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"
+     data-id="9"
+     data-name="Vintage Handbag"
+     data-price="1350"
+     data-type="Tote Bag"
+      data-brand="Vogue"
+      data-color="brown"
+      data-new="true"
+data-description="Zamansız şıklığı ve zarif detayları ile Vintage Handbag, günlük kullanım için mükemmel bir seçenek. Yüksek kaliteli deri malzemeden üretilmiş olup, geniş iç hacmi ile tüm ihtiyaçlarınızı yanınızda taşımanıza olanak sağlar."
+      data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuDAAah2XAsGYzs1PctFFxzf_I5FWgjNDiPGAnKpX5k958e9G3j5nAKB1R0E0RhJVaGmoDV7ZjS0Cn6L-jO16BQ8nt4UGs8aWJcMl4_TPPq7B9MsvkxZ0UN9FaAca_-pYz0SsMXsk31NYQuSUvqajnH10JeulsUAe8bXRBmogjKtySNwtyc7MuasqX0WQ4Jccrq9h_1woaBJRTigmbDB0glVTVM2Ne8lBkK-XHf3CmCXlHWniY8FtnRKHqK1ZYoyQyiDJA0TXD4S7cM">
+<div class="relative">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover" data-alt="A vintage style handbag" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDAAah2XAsGYzs1PctFFxzf_I5FWgjNDiPGAnKpX5k958e9G3j5nAKB1R0E0RhJVaGmoDV7ZjS0Cn6L-jO16BQ8nt4UGs8aWJcMl4_TPPq7B9MsvkxZ0UN9FaAca_-pYz0SsMXsk31NYQuSUvqajnH10JeulsUAe8bXRBmogjKtySNwtyc7MuasqX0WQ4Jccrq9h_1woaBJRTigmbDB0glVTVM2Ne8lBkK-XHf3CmCXlHWniY8FtnRKHqK1ZYoyQyiDJA0TXD4S7cM");'></div>
+<button class="favorite-btn absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-background-light/70 dark:bg-background-dark/70 backdrop-blur-sm transition hover:bg-primary/20" >
+<span class="material-symbols-outlined favorite-icon text-text-light dark:text-text-dark group-hover:text-primary">favorite_border</span>
+</button>
+</div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Vintage Handbag</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺1350</p>
+</div>
+<button class="addToCart flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary text-sm font-bold leading-normal tracking-[0.015em] transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+<div class="product-card group relative flex w-full flex-col overflow-hidden rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"
+     data-id="10"
+     data-name="Quilted Shoulder Bag"
+     data-price="2200"
+      data-old-price="2600"
+     data-type="Tote Bag"
+      data-brand="Chic"
+      data-color="black"
+      data-new="true"
+      data-description="Kapitone Omuz Çantamız ile zamansız zarafeti keşfedin. Yumuşak, kapitone bitişli birinci sınıf malzemelerden titizlikle işlenen bu çanta, her kombine sofistike bir dokunuş katıyor. Yüksek kaliteli altın tonlu donanımı ve çapraz kullanım için uzun tutulabilen ya da omuzda kullanım için ikiye katlanabilen çok yönlü zincir askısıyla dikkat çekiyor. Günlük ihtiyaçlarınız için yeterince geniş, ancak akşam davetleri için kompakt bir yapıya sahip."
+      data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuA16b6BQZrAMrtCpsxCto8h3RdiJekZF_woKKCu4QcbZ3fpf3u6Iqbt_RxLD_N-1sGj0lfJo72MD-me36Aj2wUdz5hKKoNIAU9_BfMBlx9j1W4KXTg17-R8SqwvDdT61r7SJ-Oln3L8-FUoT05giIdATy6Yfj3PQPKWva3MjjrqXeLMyu_cW0p7aLndxkWwx50X7oM4tmWRu55N3Dt2LDCLouEoY4Ed01RbGk_FOo3FsjpoSrqho0dQ04QlYKj7V1beBna1mg6Zw50">
+      <div class="relative">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover" data-alt="A luxury quilted shoulder bag" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA16b6BQZrAMrtCpsxCto8h3RdiJekZF_woKKCu4QcbZ3fpf3u6Iqbt_RxLD_N-1sGj0lfJo72MD-me36Aj2wUdz5hKKoNIAU9_BfMBlx9j1W4KXTg17-R8SqwvDdT61r7SJ-Oln3L8-FUoT05giIdATy6Yfj3PQPKWva3MjjrqXeLMyu_cW0p7aLndxkWwx50X7oM4tmWRu55N3Dt2LDCLouEoY4Ed01RbGk_FOo3FsjpoSrqho0dQ04QlYKj7V1beBna1mg6Zw50");'></div>
+<button class="favorite-btn absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-background-light/70 dark:bg-background-dark/70 backdrop-blur-sm transition hover:bg-primary/20" data-id="10">
+<span class="material-symbols-outlined favorite-icon text-text-light dark:text-text-dark group-hover:text-primary">favorite_border</span>
+</button>
+</div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Quilted Shoulder Bag</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺2200</p>
+</div>
+<button class="addToCart flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary text-sm font-bold leading-normal tracking-[0.015em] transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+
+<div class="product-card group relative flex w-full flex-col overflow-hidden rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"
+     data-id="11"
+     data-name="Vesper Wallet"
+     data-price="1200"
+     data-type="Wallet"
+      data-brand="Vesper"
+      data-color="navy"
+      data-new="true"
+      data-description="Minimalist estetiği pratiklikle birleştiren Vesper Wallet, günlük ihtiyaçlarınız için mükemmel bir arkadaş. Yumuşak dokulu İtalyan derisi ve zarif dikiş detaylarıyla stilinizi tamamlar. Kompakt yapısı sayesinde en küçük çantalarınıza bile rahatlıkla sığar."
+      data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuBj0MZmvL5U2DfWk26iwWqW-uFCwJP_YbV74TIiEOF1vwpbdzMMazwcvl_YVM6JYUElG6pfJya80OUXbI22Y7OAXuDKEEjdm3MM9KfibYxxeGBI70F3VAumKuoPsK3Mlrq-Av6maklhemiGc10j4ka1KPb_tp_1caUYbeEaehio6mvq2wF0AZyORVgFkTskdvvuQ0_nEo8iTQuEHL-zYulSLKGStX5D4G9HBChXaTzrTaGOZaVdkATyyPFIJREzLT2x5z75G-NJbIU">
+      <div class="relative">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover" data-alt="A luxury quilted shoulder bag" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBj0MZmvL5U2DfWk26iwWqW-uFCwJP_YbV74TIiEOF1vwpbdzMMazwcvl_YVM6JYUElG6pfJya80OUXbI22Y7OAXuDKEEjdm3MM9KfibYxxeGBI70F3VAumKuoPsK3Mlrq-Av6maklhemiGc10j4ka1KPb_tp_1caUYbeEaehio6mvq2wF0AZyORVgFkTskdvvuQ0_nEo8iTQuEHL-zYulSLKGStX5D4G9HBChXaTzrTaGOZaVdkATyyPFIJREzLT2x5z75G-NJbIU");'></div>
+<button class="favorite-btn absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-background-light/70 dark:bg-background-dark/70 backdrop-blur-sm transition hover:bg-primary/20" data-id="10">
+<span class="material-symbols-outlined favorite-icon text-text-light dark:text-text-dark group-hover:text-primary">favorite_border</span>
+</button>
+</div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Vesper Wallet</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺1200</p>
+</div>
+<button class="addToCart flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary text-sm font-bold leading-normal tracking-[0.015em] transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+
+
+<div class="product-card group relative flex w-full flex-col overflow-hidden rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"
+     data-id="12"
+     data-name="Solis Backpack"
+     data-price="3200"
+     data-type="Backpack"
+      data-brand="Solis"
+      data-color="black"
+      data-new="true"
+      data-description="Şehir hayatının dinamizmine uyum sağlayan, modern ve fonksiyonel bir tasarım. Solis Backpack, hem iş hem de günlük kullanım için mükemmel bir yol arkadaşıdır. Su geçirmez premium kanvas kumaşı, laptop bölmesi ve ergonomik yapısıyla konforu şıklıkla buluşturur. Minimalist çizgileri, her kombininize sofistike bir dokunuş katar."
+      data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuD5wxu4ItRL7TaMNjA_PFkcjglJgnCJJ3bFqlGNynzQKz4RV8T3Ma_NJ3A7ON-wR0TcLPrCZ8mdm4PANWjClwc3gblHro5KyiahwaN1wFCqC7WN8FOWsWqo2lfUSYV0ULLFVRSjlS2OQC3y4lIJv5FTdyrgYHr27MuxeJKOeemDsfuWevhl2GMt_QvZeI7qRao2RCd5L2DQEKePTNwBTeTOD01IkdputinzApE2v1Lu4nqjgbhdmnbBJOHPJSGWI6XbnwNPOOWgk64">
+      <div class="relative">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover" data-alt="A luxury quilted shoulder bag" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5wxu4ItRL7TaMNjA_PFkcjglJgnCJJ3bFqlGNynzQKz4RV8T3Ma_NJ3A7ON-wR0TcLPrCZ8mdm4PANWjClwc3gblHro5KyiahwaN1wFCqC7WN8FOWsWqo2lfUSYV0ULLFVRSjlS2OQC3y4lIJv5FTdyrgYHr27MuxeJKOeemDsfuWevhl2GMt_QvZeI7qRao2RCd5L2DQEKePTNwBTeTOD01IkdputinzApE2v1Lu4nqjgbhdmnbBJOHPJSGWI6XbnwNPOOWgk64");'></div>
+<button class="favorite-btn absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-background-light/70 dark:bg-background-dark/70 backdrop-blur-sm transition hover:bg-primary/20" data-id="10">
+<span class="material-symbols-outlined favorite-icon text-text-light dark:text-text-dark group-hover:text-primary">favorite_border</span>
+</button>
+</div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Solis Backpack</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺3200</p>
+</div>
+<button class="addToCart flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary text-sm font-bold leading-normal tracking-[0.015em] transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+
+<div class="product-card group relative flex w-full flex-col overflow-hidden rounded-xl bg-white dark:bg-background-dark/50 shadow-sm transition-shadow hover:shadow-lg"
+     data-id="13"
+     data-name="Terra Crossbody"
+     data-price="2850"
+     data-type="Crossbody"
+      data-brand="Chic"
+      data-color="brown"
+      data-new="true"
+      data-description="Doğal tonların ve modern minimalizmin buluştuğu Terra Crossbody, günlük şıklığınızın vazgeçilmezi olmaya aday. Ayarlanabilir omuz askısı, altın kaplama detayları ve geniş iç hacmi ile hem pratik hem de zarif bir kullanım sunar. Sürdürülebilir modaya uygun olarak premium vegan deriden üretilmiştir."
+      data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuAxrSYrXEuaU47P694kMfHg7SfQl6s4yY09LoxXkIj9WZksnf23zIzNmT-kfsB4B1INsitvxhPnYgvW9-j-dQGDMqJTQKFYv_Ri4aTwpiYsJ0bFdd6O-bSI8pkPzL1SBWhNJ75WlNKZr3XG2urtEuCU5LfAy3d83dzpccR0iC_G15yGEC_tIySjSrD7rkfup11GElduX3M8CShzt0NGWTaNQ9jnYyi3t_LSrYLytE-qSkmiT3RayCTgxGH96L-8OUCmICPt3yF1XuA">
+      <div class="relative">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover" data-alt="A luxury quilted shoulder bag" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAxrSYrXEuaU47P694kMfHg7SfQl6s4yY09LoxXkIj9WZksnf23zIzNmT-kfsB4B1INsitvxhPnYgvW9-j-dQGDMqJTQKFYv_Ri4aTwpiYsJ0bFdd6O-bSI8pkPzL1SBWhNJ75WlNKZr3XG2urtEuCU5LfAy3d83dzpccR0iC_G15yGEC_tIySjSrD7rkfup11GElduX3M8CShzt0NGWTaNQ9jnYyi3t_LSrYLytE-qSkmiT3RayCTgxGH96L-8OUCmICPt3yF1XuA");'></div>
+<button class="favorite-btn absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-background-light/70 dark:bg-background-dark/70 backdrop-blur-sm transition hover:bg-primary/20" data-id="10">
+<span class="material-symbols-outlined favorite-icon text-text-light dark:text-text-dark group-hover:text-primary">favorite_border</span>
+</button>
+</div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-4">
+<div>
+<p class="text-text-light dark:text-text-dark font-medium leading-normal">Terra Crossbody</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">₺2850</p>
+</div>
+<button class="addToCart flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary text-sm font-bold leading-normal tracking-[0.015em] transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="truncate">Sepete Ekle</span>
+</button>
+</div>
+</div>
+
+
+</div>
+</div>
+
+</section>
+</div>
+</div>
+</main>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".addToCart");
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const card = button.closest("[data-id]");
+      if (!card) return;
+
+
+const product = {
+  id: card.dataset.id,
+  name: card.dataset.name,
+  price: Number(card.dataset.price),
+  image: card.dataset.image,   // 🔥🔥🔥 FOTO BURADA
+  color: card.dataset.color || null,
+  quantity: 1
+};
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(item => item.id === product.id);
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push(product);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      showToast("🛒 Ürün sepete eklendi");
+
+    });
+  });
+});
+
+
+</script>
+
+
+
+<script>
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const searchInput = document.getElementById("searchInput");
+
+  let selectedFilters = {
+    type: [],
+    brand: [],
+    color: [],
+    minPrice: null,
+    maxPrice: null
+  };
+
+  // CHECKBOX FILTERS
+document.querySelectorAll(".filter").forEach(filter => {
+  filter.addEventListener("change", () => {
+    const group = filter.dataset.filterGroup;
+    const value = filter.value.toLowerCase();
+
+if (filter.checked) {
+  if (!selectedFilters[group].includes(value)) {
+    selectedFilters[group].push(value);
+  }
+} else {
+  selectedFilters[group] =
+    selectedFilters[group].filter(v => v !== value);
+}
+
+applyFilters(); // 🔥 UNCHECK'TE ÇALIŞIR
+    }
+  );
+});
+
+
+  // COLOR BUTTON FILTERS
+  document.querySelectorAll('[data-filter-group="color"]').forEach(btn => {
+    btn.addEventListener("click", () => {
+      const value = btn.dataset.value.toLowerCase();
+      btn.classList.toggle("active");
+
+      if (btn.classList.contains("active")) {
+        selectedFilters.color.push(value);
+      } else {
+        selectedFilters.color =
+          selectedFilters.color.filter(v => v !== value);
+      }
+
+
+       applyFilters(); // 🔥 BUNU EKLE
+    });
+  });
+
+
+  // APPLY FILTERS
+  document.getElementById("applyFilters").addEventListener("click", () => {
+  applyFilters();
+});
+  function applyFilters() {
+    document.querySelectorAll("[data-id]").forEach(product => {
+      let visible = true;
+
+      // PRICE
+      const price = Number(product.dataset.price);
+      const min = Number(document.getElementById("minPrice").value) || 0;
+      const max = Number(document.getElementById("maxPrice").value) || Infinity;
+
+      if (price < min || price > max) visible = false;
+
+      // SEARCH
+      const searchText = searchInput.value.toLowerCase();
+      const name = product.dataset.name.toLowerCase();
+      if (!name.includes(searchText)) visible = false;
+
+      // TYPE / BRAND / COLOR
+      for (const group in selectedFilters) {
+        if (["minPrice", "maxPrice"].includes(group)) continue;
+        if (selectedFilters[group].length === 0) continue;
+
+       const productValue = product.dataset[group]?.toLowerCase();
+
+// ❗ ürün bu filtre grubuna ait değilse → GÖSTERME
+  if (!productValue) {
+    visible = false;
+    break;
+  }
+
+  if (!selectedFilters[group].includes(productValue.toLowerCase())) {
+    visible = false;
+    break;
+  }
+}
+      product.style.display = visible ? "" : "none";
+    });
+  }
+
+
+   searchInput.addEventListener("input", () => {
+    applyFilters();
+  });
+
+
+
+  // CLEAR FILTERS
+  document.getElementById("clearFilters").addEventListener("click", () => {
+    selectedFilters = { type: [], brand: [], color: [], minPrice: null, maxPrice: null };
+
+    document.querySelectorAll(".filter").forEach(f => f.checked = false);
+    document.querySelectorAll('[data-filter-group="color"]')
+      .forEach(btn => btn.classList.remove("active"));
+
+    document.getElementById("minPrice").value = "";
+    document.getElementById("maxPrice").value = "";
+    searchInput.value = "";
+   applyFilters();
+
+  });
+
+});
+
+// NAV MENU ACTIONS
+
+document.getElementById("navBags").addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById("clearFilters").click();
+});
+
+// New In (yeni ürünler)
+document.getElementById("navNew").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  document.querySelectorAll("[data-id]").forEach(p => {
+    p.style.display = p.dataset.new === "true" ? "" : "none";
+  });
+});
+
+// Offers (indirim)
+document.getElementById("navOffers").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  document.querySelectorAll("[data-id]").forEach(p => {
+    p.style.display = p.dataset.sale === "true" ? "" : "none";
+  });
+});
+
+// Collections (placeholder – şimdilik yeterli)
+document.getElementById("navCollections").addEventListener("click", (e) => {
+  e.preventDefault();
+showToast("Koleksiyonlar yakında geliyor 👀");
+});
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sortSelect = document.getElementById("sort");
+
+  // Ürünlerin bulunduğu grid
+  const productGrid = document.querySelector(
+    ".grid.grid-cols-1.sm\\:grid-cols-2.xl\\:grid-cols-3"
+  );
+
+  // İlk sıralamayı sakla (Popularity için)
+  const originalOrder = Array.from(productGrid.children);
+
+  sortSelect.addEventListener("change", () => {
+    let products = Array.from(productGrid.children);
+    const value = sortSelect.value;
+
+    if (value === "Price: Low to High") {
+      products.sort((a, b) =>
+        Number(a.dataset.price) - Number(b.dataset.price)
+      );
+    }
+
+    if (value === "Price: High to Low") {
+      products.sort((a, b) =>
+        Number(b.dataset.price) - Number(a.dataset.price)
+      );
+    }
+
+    if (value === "Newest") {
+      products.sort((a, b) =>
+        Number(b.dataset.id) - Number(a.dataset.id)
+      );
+    }
+
+    if (value === "Popularity") {
+      products = [...originalOrder];
+    }
+
+    // DOM'u temizle & yeniden ekle
+    productGrid.innerHTML = "";
+    products.forEach(p => productGrid.appendChild(p));
+  });
+});
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+
+  toast.classList.remove("hidden");
+  toast.classList.add("opacity-100");
+
+  setTimeout(() => {
+    toast.classList.add("opacity-0");
+  }, 2000);
+
+  setTimeout(() => {
+    toast.classList.add("hidden");
+    toast.classList.remove("opacity-0");
+  }, 2300);
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  // FAVORITES
+document.querySelectorAll(".favorite-btn").forEach(button => {
+  button.addEventListener("click", function () {
+     let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    const productCard = this.closest(".group"); // 🔥 BU SATIR ŞART
+
+    if (!productCard) {
+      console.error("productCard bulunamadı");
+      return;
+    }
+const product = {
+  id: productCard.dataset.id,
+  name: productCard.dataset.name,
+  price: Number(productCard.dataset.price),
+  oldPrice: productCard.dataset.oldPrice
+    ? Number(productCard.dataset.oldPrice)
+    : null,
+  sale: productCard.dataset.sale === "true",
+  inStock: productCard.dataset.stock !== "false",
+  image: productCard.dataset.image
+};
+
+
+
+      const index = favorites.findIndex(p => p.id === product.id);
+
+      if (index > -1) {
+        favorites.splice(index, 1);
+      } else {
+        favorites.push(product);
+      }
+
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      showToast(index > -1 ? "💔 Favorilerden çıkarıldı" : "❤️ Favorilere eklendi");
+    });
+  });
+
+});
+
+</script>
+
+<script>
+
+   let currentProductId = null;
+  document.addEventListener("DOMContentLoaded", () => {
+
+    const modalContent = document.getElementById("modalContent");
+
+function openModal() {
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+
+  requestAnimationFrame(() => {
+    modal.classList.add("bg-black/50");
+
+    modalContent.classList.remove("scale-95", "translate-y-4", "opacity-0");
+    modalContent.classList.add("scale-100", "translate-y-0", "opacity-100");
+  });
+}
+
+
+const modal = document.getElementById("productModal");
+const closeModal = document.getElementById("closeModal");
+
+// modal alanları
+const modalImage = document.getElementById("modalImage");
+const modalName = document.getElementById("modalName");
+const modalPrice = document.getElementById("modalPrice");
+const modalBrand = document.getElementById("modalBrand");
+const modalType = document.getElementById("modalType");
+const modalColor = document.getElementById("modalColor");
+
+// Ürün kartları
+document.querySelectorAll("[data-id]").forEach(card => {
+  card.addEventListener("click", (e) => {
+   
+
+
+    // Sepete ekle veya favoriye tıklanırsa modal açılmasın
+    if (
+      e.target.closest(".addToCart") ||
+      e.target.closest(".favorite-btn")
+    ) {
+      return;
+    }
+
+    // data'ları al
+    modalImage.src = card.dataset.image;
+    currentProductId = card.dataset.id;
+
+    modalName.textContent = card.dataset.name;
+    modalPrice.textContent = "₺" + card.dataset.price;
+    modalBrand.textContent = card.dataset.brand;
+    modalType.textContent = card.dataset.type;
+    modalColor.textContent = card.dataset.color;
+
+ const modalDescription = document.getElementById("modalDescription");
+
+ if (modalDescription) {
+  modalDescription.textContent = card.dataset.description;
+}
+
+  openModal();
+});
+});
+
+// Modal kapatma
+closeModal.addEventListener("click", closeModalAnimated);
+
+
+// Arka plana tıklayınca kapansın
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModalAnimated();
+  }
+});
+
+
+const modalAddToCart = document.getElementById("modalAddToCart");
+
+modalAddToCart.addEventListener("click", () => {
+  if (!currentProductId) return;
+
+  const card = document.querySelector(`[data-id="${currentProductId}"]`);
+  const addBtn = card.querySelector(".addToCart");
+
+  addBtn.click(); // karttaki sepete ekleyi tetikler
+
+});
+
+
+const modalFavorite = document.getElementById("modalFavorite");
+const modalFavIcon = document.getElementById("modalFavIcon");
+
+modalFavorite.addEventListener("click", () => {
+  if (!currentProductId) return;
+
+  const card = document.querySelector(`[data-id="${currentProductId}"]`);
+  const favBtn = card.querySelector(".favorite-btn");
+
+  favBtn.click(); // karttaki favoriyi tetikler
+
+  const icon = favBtn.querySelector(".favorite-icon");
+  modalFavIcon.textContent = icon.textContent;
+});
+
+
+function closeModalAnimated() {
+  modal.classList.remove("bg-black/50");
+
+  modalContent.classList.add("scale-95", "translate-y-4", "opacity-0");
+  modalContent.classList.remove("scale-100", "translate-y-0", "opacity-100");
+
+  setTimeout(() => {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }, 300);
+}
+
+});
+
+</script>
+
+<div
+  id="toast"
+  class="fixed bottom-6 right-6 z-50 hidden rounded-xl bg-black text-white px-5 py-3 text-sm shadow-lg transition-opacity duration-300"
+>
+  Collections coming soon 👀
+</div>
+
+<!-- PRODUCT DETAIL MODAL -->
+
+
+<div id="productModal"
+  class="fixed inset-0 z-50 hidden flex items-center justify-center
+         bg-black/0 transition-all duration-300 ease-out">
+<div id="modalContent"
+  class="bg-white dark:bg-background-dark rounded-xl w-[90%] max-w-2xl p-6 relative
+         transform scale-95 translate-y-4 opacity-0
+         transition-all duration-300 ease-out">
+
+    <!-- Close button -->
+    <button id="closeModal"
+      class="absolute top-4 right-4 text-gray-500 hover:text-primary text-2xl">
+      ✕
+    </button>
+
+    <button id="modalFavorite"
+  class="absolute top-4 left-4 flex h-9 w-9 items-center justify-center rounded-full
+         bg-background-light/70 dark:bg-background-dark/70 backdrop-blur-sm
+         hover:bg-primary/20 transition">
+  <span id="modalFavIcon"
+    class="material-symbols-outlined text-text-light dark:text-text-dark">
+    favorite_border
+  </span>
+</button>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Image -->
+      <img id="modalImage" src="" alt=""
+        class="w-full aspect-square object-cover rounded-lg"/>
+
+      <!-- Info -->
+      <div class="flex flex-col gap-3">
+        <h2 id="modalName" class="text-xl font-bold text-text-light dark:text-text-dark"></h2>
+        <p id="modalPrice" class="text-lg text-primary font-semibold"></p>
+
+        <p class="text-sm text-gray-500">
+          <span class="font-medium">Brand:</span>
+          <span id="modalBrand"></span>
+        </p>
+
+        <p class="text-sm text-gray-500">
+          <span class="font-medium">Type:</span>
+          <span id="modalType"></span>
+        </p>
+
+        <p class="text-sm text-gray-500">
+          <span class="font-medium">Color:</span>
+          <span id="modalColor"></span>
+        </p>
+<p id="modalDescription"
+   class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+</p>
+
+        <button id="modalAddToCart"
+          class="mt-4 h-11 rounded-lg bg-primary text-white font-bold hover:opacity-90">
+          Sepete Ekle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</body></html>

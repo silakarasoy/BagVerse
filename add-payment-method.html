@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BagVerse - Yeni Ödeme Yöntemi Ekle</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="sticky top-0 z-10 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
+<div class="container mx-auto px-4">
+<div class="flex h-16 items-center justify-between">
+<a href="index.html" class="flex items-center gap-3 text-slate-900 dark:text-slate-50">
+  <div class="size-6 text-primary">
+    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_6_535)">
+        <path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_6_535">
+          <rect fill="white" width="48" height="48"></rect>
+        </clipPath>
+      </defs>
+    </svg>
+  </div>
+  <h2 class="text-lg font-bold tracking-[-0.015em]">BAGVERSE</h2>
+</a>
+
+<div class="hidden items-center gap-8 text-sm font-medium lg:flex">
+<a class="text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html">Anasayfa</a>
+<a class="text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="products.html">Ürünler</a>
+<a class="text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="contact.html">İletişim</a>
+<a class="text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about-us.html">Hakkımızda</a>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-xl">search</span>
+</button>
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="User avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA8kdWXwxcf8hP2bwb76brBLqWOUHGdzSkM7xATU12BvmXlUGvNpGPQVXwoU3CmXhe3WlaN0TqacT63WS3jdee8ks5JrPj5Fldu15DDzpm6dc_VaBoUmWN3vJzG7pTGhxPL19DwBPoBFO75YiqFuJmi1TuIpvnJmmZYbvZCLtfglj5JOq08mMzTuJNuouYXCD89ExUy2TgtJYbDSALSoTMUExfmQMVJlMOnD4pXIcqEc99KCZ3pahJS-6VSZIPi4RfK_iaBzUPKS_0");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<div class="container mx-auto max-w-2xl px-4 py-8 sm:py-12">
+<div class="flex flex-col gap-8">
+<div class="flex flex-wrap items-center gap-2">
+<a class="text-sm font-medium text-primary hover:underline" href="profile.html">Hesabım</a>
+<span class="text-sm font-medium text-slate-400 dark:text-slate-500">/</span>
+<a class="text-sm font-medium text-primary hover:underline" href="payment-methods.html">Ödeme Yöntemlerim</a>
+<span class="text-sm font-medium text-slate-400 dark:text-slate-500">/</span>
+<span class="text-sm font-medium text-slate-800 dark:text-slate-200">Yeni Ekle</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<h1 class="text-3xl font-black tracking-tighter text-slate-900 dark:text-slate-50">Yeni Ödeme Yöntemi Ekle</h1>
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">lock</span>
+</div>
+<p class="text-base font-normal text-slate-600 dark:text-slate-400">Yeni bir kredi veya banka kartını güvenle ekleyin.</p>
+</div>
+<div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+<form id="addPaymentForm" class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="cardNumber">Kart Numarası</label>
+<div class="relative">
+<input class="block w-full rounded-lg border-slate-300 bg-slate-50 py-2.5 pl-12 pr-4 text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:placeholder:text-slate-500 dark:focus:border-primary dark:focus:ring-primary" id="cardNumber" placeholder="0000 0000 0000 0000" type="text"/>
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500">credit_card</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="cardName">Kart Üzerindeki Ad Soyad</label>
+<input class="block w-full rounded-lg border-slate-300 bg-slate-50 py-2.5 px-4 text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:placeholder:text-slate-500 dark:focus:border-primary dark:focus:ring-primary" id="cardName" placeholder="Ad Soyad" type="text"/>
+</div>
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="expiryDate">Son Kullanma Tarihi</label>
+<div class="flex gap-2">
+<input class="block w-full rounded-lg border-slate-300 bg-slate-50 py-2.5 px-4 text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:placeholder:text-slate-500 dark:focus:border-primary dark:focus:ring-primary" id="expiryMonth" placeholder="AA" type="text"/>
+<span class="flex items-center text-slate-400 dark:text-slate-500">/</span>
+<input class="block w-full rounded-lg border-slate-300 bg-slate-50 py-2.5 px-4 text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:placeholder:text-slate-500 dark:focus:border-primary dark:focus:ring-primary" id="expiryYear" placeholder="YY" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="cvv">CVV/CVC</label>
+<div class="relative">
+<input class="block w-full rounded-lg border-slate-300 bg-slate-50 py-2.5 pl-4 pr-12 text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:placeholder:text-slate-500 dark:focus:border-primary dark:focus:ring-primary" id="cvv" placeholder="123" type="text"/>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500">help_outline</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<input class="h-4 w-4 rounded border-slate-300 bg-slate-50 text-primary focus:ring-2 focus:ring-primary dark:border-slate-600 dark:bg-slate-800 dark:checked:bg-primary dark:focus:ring-primary" id="defaultMethod" type="checkbox"/>
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300" for="defaultMethod">Varsayılan Ödeme Yöntemi Olarak Ayarla</label>
+</div>
+<div class="mt-4 flex flex-col-reverse items-center gap-3 border-t border-slate-200 pt-6 dark:border-slate-800 sm:flex-row sm:justify-end">
+<button class="flex h-10 w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-slate-100 px-4 text-sm font-bold leading-normal tracking-wide text-slate-800 shadow-sm transition-colors hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700" type="button">
+<span class="truncate">İptal</span>
+</button>
+<button class="flex h-10 w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold leading-normal tracking-wide text-white shadow-sm transition-colors hover:bg-primary/90" type="submit">
+<span class="truncate">Kaydet</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<script>
+const form = document.querySelector("form");
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const cardNumber = document.getElementById("cardNumber").value.trim();
+  const cardName = document.getElementById("cardName").value.trim();
+  const expiryMonth = document.getElementById("expiryMonth").value.trim();
+  const expiryYear = document.getElementById("expiryYear").value.trim();
+  const cvv = document.getElementById("cvv").value.trim();
+  const isDefault = document.getElementById("defaultMethod").checked;
+
+  if (!cardNumber || !cardName || !expiryMonth || !expiryYear || !cvv) {
+    alert("Lütfen tüm alanları doldurun");
+    return;
+  }
+
+  const last4 = cardNumber.slice(-4);
+
+  let paymentMethods =
+    JSON.parse(localStorage.getItem("paymentMethods")) || [];
+
+  if (isDefault) {
+    paymentMethods = paymentMethods.map(card => ({
+      ...card,
+      isDefault: false
+    }));
+  }
+
+  const newCard = {
+    id: Date.now(),
+    userEmail: currentUser.email,
+    type: "Visa",
+    last4: last4,
+    expiry: `${expiryMonth}/${expiryYear}`,
+    name: cardName,
+    isDefault: isDefault
+  };
+
+  paymentMethods.push(newCard);
+
+  localStorage.setItem(
+    "paymentMethods",
+    JSON.stringify(paymentMethods)
+  );
+
+  window.location.href = "payment-methods.html";
+});
+</script>
+
+
+<script>
+const cardNumberInput = document.getElementById("cardNumber");
+
+cardNumberInput.addEventListener("input", (e) => {
+  let value = e.target.value;
+
+  // boşlukları sil
+  value = value.replace(/\s+/g, "");
+
+  // sadece rakam kalsın
+  value = value.replace(/\D/g, "");
+
+  // 4’erli gruplar
+  value = value.match(/.{1,4}/g)?.join(" ") || "";
+
+  // max 19 karakter (16 rakam + 3 boşluk)
+  e.target.value = value.substring(0, 19);
+});
+
+
+cardNumberInput.addEventListener("input", (e) => {
+  let value = e.target.value.replace(/\D/g, ""); // sadece rakam
+  value = value.substring(0, 16); // max 16 hane
+
+  // 4'lü gruplara ayır
+  value = value.replace(/(.{4})/g, "$1 ").trim();
+
+  e.target.value = value;
+});
+
+
+const expiryMonth = document.getElementById("expiryMonth");
+const expiryYear = document.getElementById("expiryYear");
+
+expiryMonth.addEventListener("input", () => {
+  expiryMonth.value = expiryMonth.value.replace(/\D/g, "").substring(0, 2);
+
+  if (expiryMonth.value.length === 2) {
+    expiryYear.focus();
+  }
+});
+
+expiryYear.addEventListener("input", () => {
+  expiryYear.value = expiryYear.value.replace(/\D/g, "").substring(0, 2);
+});
+
+
+const cvvInput = document.getElementById("cvv");
+
+cvvInput.addEventListener("input", () => {
+  cvvInput.value = cvvInput.value.replace(/\D/g, "").substring(0, 3);
+});
+
+
+cardNumberInput.addEventListener("input", () => {
+  const firstDigit = cardNumberInput.value.trim()[0];
+
+  if (firstDigit === "4") {
+    console.log("Visa");
+  } else if (firstDigit === "5") {
+    console.log("Mastercard");
+  }
+});
+
+
+</script>
+
+
+<script>
+const expiryMonthInput = document.getElementById("expiryMonth");
+
+expiryMonthInput.addEventListener("input", () => {
+  let value = expiryMonthInput.value;
+
+  // sadece rakam kalsın
+  value = value.replace(/\D/g, "");
+
+  // en fazla 2 hane
+  if (value.length > 2) {
+    value = value.slice(0, 2);
+  }
+
+  // 12'den büyükse 12 yap
+  if (parseInt(value, 10) > 12) {
+    value = "12";
+  }
+
+  // 00 olmasın
+  if (value === "00") {
+    value = "01";
+  }
+
+  expiryMonthInput.value = value;
+});
+
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault(); // sayfa yenilenmesin
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (!currentUser) {
+    alert("Lütfen giriş yapın");
+    return;
+  }
+
+  const cardNumberRaw = document.getElementById("cardNumber").value;
+  const cardNumber = cardNumberRaw.replace(/\s/g, "");
+
+  const cardName = document.getElementById("cardName").value.trim();
+  const month = document.getElementById("expiryMonth").value;
+  const year = document.getElementById("expiryYear").value;
+  const cvv = document.getElementById("cvv").value;
+  const isDefault = document.getElementById("defaultMethod").checked;
+
+  // basit kontrol
+  if (
+    cardNumber.length !== 16 ||
+    !cardName ||
+    month.length !== 2 ||
+    year.length !== 2 ||
+    cvv.length < 3
+  ) {
+    alert("Lütfen tüm alanları doğru doldurun");
+    return;
+  }
+
+  const paymentMethods =
+    JSON.parse(localStorage.getItem("paymentMethods")) || [];
+
+  // Eğer bu kart varsayılan olacaksa, kullanıcının diğer kartlarını false yap
+  if (isDefault) {
+    paymentMethods.forEach(card => {
+      if (card.userEmail === currentUser.email) {
+        card.isDefault = false;
+      }
+    });
+  }
+
+  const newCard = {
+    id: Date.now(),
+    userEmail: currentUser.email,
+    type: cardNumber.startsWith("4") ? "Visa" : "MasterCard",
+    last4: cardNumber.slice(-4),
+    expiry: `${month}/${year}`,
+    name: cardName,
+    isDefault: isDefault
+  };
+
+  paymentMethods.push(newCard);
+  localStorage.setItem("paymentMethods", JSON.stringify(paymentMethods));
+
+  // ödeme yöntemleri sayfasına dön
+  window.location.href = "payment-methods.html";
+});
+</script>
+
+
+
+</body></html>

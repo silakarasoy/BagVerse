@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BagVerse Sipariş Takibi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#1173d4",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<header class="w-full bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<a href="index.html" class="flex items-center gap-3 text-slate-900 dark:text-slate-50">
+  <div class="size-6 text-primary">
+    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_6_535)">
+        <path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_6_535">
+          <rect fill="white" width="48" height="48"></rect>
+        </clipPath>
+      </defs>
+    </svg>
+  </div>
+  <h2 class="text-lg font-bold tracking-[-0.015em]">BAGVERSE</h2>
+</a>
+
+<div class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium" href="index.html">Anasayfa</a>
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium" href="products.html">Ürünler</a>
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium" href="contact.html">İletişim</a>
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium" href="about-us.html">Hakkımızda</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-full h-10 w-10 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-2xl">search</span>
+</button>
+<button class="flex items-center justify-center rounded-full h-10 w-10 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-2xl">shopping_bag</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA3-aNhevQY0FFCTHU3XiU4EanZw2nApPn-GV7jYIleJx_n_iDHdd9dTcbaEUOVR2IDaKvByh-PqQdVtoBnd4A2vbOD9g0yM7kg_cNINFCxco8D4Qr6FbYD_RQrxFFfrQw1a3wOQ59AZyM2_3c_yV4RPqYo3-YKlSnm8OWXVAur64X_ajPHcKa3tkPksnA-uA-dCb1UbTh5mvjR-H0PBOLUMX2E0Uqvvh3Wa9c9QjtldVYuPTDQuAMt115GOazBR0XDvZ_4R-ISdw0");'></div>
+</div>  
+</div>
+</div>
+</header>
+<main class="flex-1 w-full">
+<div class="py-12 sm:py-16 lg:py-20">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center">
+<h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">Sipariş Takibi</h1>
+<p class="mt-2 text-lg text-slate-600 dark:text-slate-400">Sipariş Numarası: <span id="orderId" class="font-semibold text-slate-800 dark:text-slate-200"></span></p>
+</div>
+<div class="mt-10 p-6 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+<div>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-medium">Tahmini Teslimat</p>
+<p id="deliveryDate" class="text-slate-900 dark:text-slate-50 tracking-tight text-xl font-bold"></p>
+</div>
+<div>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-medium">Kargo Firması</p>
+<p id="cargoCompany" class="text-slate-900 dark:text-slate-50 tracking-tight text-xl font-bold"></p>
+</div>
+<div class="flex-grow">
+<p class="text-slate-600 dark:text-slate-400 text-sm font-medium">Takip Numarası</p>
+<div class="flex items-center gap-2">
+<p id="trackingNumber" class="text-slate-900 dark:text-slate-50 tracking-tight text-xl font-bold"></p>
+<button class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+
+</div>
+<div class="mt-8">
+<div class="relative">
+<div aria-hidden="true" class="absolute left-2.5 top-2.5 h-full w-0.5 bg-slate-200 dark:bg-slate-700"></div>
+<div aria-hidden="true" class="absolute left-2.5 top-2.5 h-[50%] w-0.5 bg-primary"></div>
+<ul id="timeline" class="relative space-y-8">
+</ul>
+</div>
+</div>
+
+<div class="mt-10 flex justify-center">
+  <a
+    href="products.html"
+    class="inline-flex items-center justify-center rounded-lg h-11 px-8 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90"
+  >
+    Alışverişe Devam Et
+  </a>
+</div>
+
+</div>
+</div>
+</div>
+</main>
+</div>
+
+
+
+<script>
+
+function getEstimatedDelivery(orderDate) {
+  const start = new Date(orderDate);
+
+  const minDays = 3;
+  const maxDays = 10;
+
+  const randomDays =
+    Math.floor(Math.random() * (maxDays - minDays + 1)) + minDays;
+
+  const end = new Date(start);
+  end.setDate(start.getDate() + randomDays);
+
+  return `${start.toLocaleDateString("tr-TR")} - ${end.toLocaleDateString("tr-TR")}`;
+}
+
+
+
+  console.log("orders:", localStorage.getItem("orders"));
+console.log("lastOrderId:", localStorage.getItem("lastOrderId"));
+
+const orders = JSON.parse(localStorage.getItem("orders")) || [];
+const lastOrderId = localStorage.getItem("lastOrderId");
+
+if (!lastOrderId) {
+  alert("Sipariş ID bulunamadı");
+  window.location.href = "index.html";
+}
+
+const lastOrder = orders.find(o => String(o.id) === String(lastOrderId));
+
+if (!lastOrder) {
+  alert("Sipariş bulunamadı");
+  window.location.href = "index.html";
+}
+
+
+document.getElementById("orderId").innerText = "#" + lastOrder.id;
+
+
+
+
+// 🚚 Kargo Bilgileri
+document.getElementById("deliveryDate").innerText =
+  getEstimatedDelivery(lastOrder.date);
+
+
+
+document.getElementById("cargoCompany").innerText =
+  lastOrder.shippingInfo?.company || "Belirlenmedi";
+
+document.getElementById("trackingNumber").innerText =
+  lastOrder.shippingInfo?.trackingNo || "-";
+
+// 🧾 Sipariş No
+document.getElementById("orderId").innerText =
+  "#BV-" + lastOrder.id;
+
+  
+const steps = [
+  "Sipariş Alındı",
+  "Hazırlanıyor",
+  "Kargoya Verildi",
+  "Yolda",
+  "Teslim Edildi"
+];
+
+const randomStepIndex = Math.floor(Math.random() * 3);
+lastOrder.status = steps[randomStepIndex];
+
+
+
+
+const timeline = document.getElementById("timeline");
+const currentStepIndex = steps.indexOf(lastOrder.status);
+
+timeline.innerHTML = "";
+
+steps.forEach((step, index) => {
+  const isDone = index <= currentStepIndex;
+
+  timeline.innerHTML += `
+    <li class="flex items-start">
+      <div class="flex-shrink-0">
+        <div class="flex h-5 w-5 items-center justify-center rounded-full
+          ${isDone ? "bg-primary" : "bg-slate-300 dark:bg-slate-600"}
+          ring-4 ring-background-light dark:ring-slate-800/50">
+          ${isDone ? '<span class="material-symbols-outlined text-xs text-white">check</span>' : ''}
+        </div>
+      </div>
+
+      <div class="ml-4">
+        <h4 class="font-semibold
+          ${isDone ? "text-slate-800 dark:text-slate-200" : "text-slate-500 dark:text-slate-400"}">
+          ${step}
+        </h4>
+      </div>
+    </li>
+  `;
+});
+
+</script>
+
+
+
+</body></html>

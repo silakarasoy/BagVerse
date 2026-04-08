@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BagVerse - Favorilerim</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    
+    </script>
+ 
+
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d141b] dark:text-slate-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<!-- TopNavBar -->
+<header class=" z-50 w-full bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between whitespace-nowrap h-16">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl">local_mall</span>
+<h2 class="text-[#0d141b] dark:text-slate-50 text-xl font-bold leading-tight tracking-[-0.015em]">BagVerse</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Anasayfa</a>
+<a class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="products.html">Ürünler</a>
+<a class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="contact.html">İletişim</a>
+<a class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="about-us.html">Hakkımızda</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4">
+<label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-500 dark:text-slate-400 flex bg-slate-200 dark:bg-slate-800 items-center justify-center pl-3 rounded-l-lg">
+<span class="material-symbols-outlined !text-xl !font-light">search</span>
+</div>
+<input  id="favoriteSearch" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141b] dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-slate-200 dark:bg-slate-800 h-full placeholder:text-slate-500 dark:placeholder:text-slate-400 px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Search" value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex sm:hidden max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-slate-200 dark:bg-slate-800 text-[#0d141b] dark:text-slate-200 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined !text-2xl !font-light">search</span>
+</button>
+<a href="favorites.html">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-slate-200 dark:bg-slate-800 text-[#0d141b] dark:text-slate-200 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined !text-2xl !font-light">favorite</span>
+</button> </a> 
+<a href="cart.html">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-slate-200 dark:bg-slate-800 text-[#0d141b] dark:text-slate-200 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined !text-2xl !font-light">shopping_bag</span>
+</button> </a>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBbq2VmtkDJfpZ0Jwx2kd3ang4ZiZW-0AGFjYay1numgLEpyw_DXBiCXW20QIro0-THSf1wz5UnZQSL4v6YPBJtzBdZz60rcUV0ddScfJCMS7Gr8LeZwJBiUV_mURE-oFidLnN4kwWNlWoZnaUD1dwxRlgyTmytG_vI6lOP_RfLhVeiohI48x45Vo4guwfDwOXlC-8w41elGqw60dq2S4QP8R_QiiUZzbu-vgxiSwUT1ZJbVqM3zyZl4xULbDnPkeLcJ7_t4IbA7mI");'></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex h-full grow flex-col">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+<div class="flex flex-col gap-8">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between gap-3 px-4">
+<h1 class="text-[#0d141b] dark:text-slate-50 text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Favorilerim</h1>
+</div>
+<!-- Tabs -->
+<div class="flex border-b border-slate-300 dark:border-slate-700 px-4 gap-8">
+
+  <a data-tab="all"
+     class="tab flex flex-col items-center justify-center border-b-[3px] border-b-primary text-primary pb-[13px] pt-4 cursor-pointer">
+    <p class="text-sm font-bold">Tümü</p>
+  </a>
+
+  <a data-tab="sale"
+     class="tab flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-slate-500 hover:text-[#0d141b] pb-[13px] pt-4 cursor-pointer">
+    <p class="text-sm font-bold">İndirimde Olanlar</p>
+  </a>
+
+  <a data-tab="price-drop"
+     class="tab flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-slate-500 hover:text-[#0d141b] pb-[13px] pt-4 cursor-pointer">
+    <p class="text-sm font-bold">Fiyatı Düşenler</p>
+  </a>
+
+  <a data-tab="out"
+     class="tab flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-slate-500 hover:text-[#0d141b] pb-[13px] pt-4 cursor-pointer">
+    <p class="text-sm font-bold">Stokta Olmayanlar</p>
+  </a>
+
+</div>
+
+<!-- Product Grid -->
+<div
+  id="favoritesGrid"
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+</div>
+ 
+
+<div id="emptyState" class="hidden">
+  <!-- senin boş state HTML’in -->
+</div>
+
+<!-- EmptyState (To be shown when there are no items) -->
+<!--
+                    <div class="flex flex-col px-4 py-20">
+                        <div class="flex flex-col items-center gap-6">
+                            <img src="https://illustrations.popsy.co/amber/woman-holding-a-shopping-bag.svg" alt="Woman holding a shopping bag illustration" class="w-full max-w-[320px]"/>
+                            <div class="flex max-w-[480px] flex-col items-center gap-2">
+                                <p class="text-[#0d141b] dark:text-slate-50 text-xl font-bold leading-tight tracking-[-0.015em] max-w-[480px] text-center">Favori listeniz boş.</p>
+                                <p class="text-slate-600 dark:text-slate-300 text-sm font-normal leading-normal max-w-[480px] text-center">Beğendiğiniz ürünleri kalp ikonuna tıklayarak buraya ekleyebilirsiniz.</p>
+                            </div>
+                            <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+                                <span class="truncate">Alışverişe Başla</span>
+                            </button>
+                        </div>
+                    </div>
+                    -->
+</div>
+</div>
+</main>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("favoritesGrid");
+
+  document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t =>
+      t.classList.remove("border-b-primary", "text-primary")
+    );
+
+    tab.classList.add("border-b-primary", "text-primary");
+
+    const type = tab.dataset.tab;
+    let list = getFavorites();
+
+    if (type === "sale") {
+      list = list.filter(p => p.onSale);
+    }
+
+    if (type === "out") {
+      list = list.filter(p => p.stock === 0);
+    }
+
+    render(list);
+  });
+});
+
+
+  const searchInput = document.getElementById("favoriteSearch");
+
+searchInput?.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+
+  const filtered = getFavorites().filter(p =>
+    p.name.toLowerCase().includes(query)
+  );
+
+  render(filtered);
+});
+
+  function getFavorites() {
+    return JSON.parse(localStorage.getItem("favorites")) || [];
+  }
+
+  function setFavorites(list) {
+    localStorage.setItem("favorites", JSON.stringify(list));
+  }
+
+  function getCart() {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  }
+
+  function setCart(list) {
+    localStorage.setItem("cart", JSON.stringify(list));
+  }
+
+ function render(list, isFiltered = false) {
+  const allFavorites = getFavorites();
+
+  if (list.length === 0) {
+    grid.innerHTML = `
+      <div class="col-span-full text-center text-slate-400 py-20">
+        ${isFiltered && allFavorites.length > 0
+          ? "Bu filtreye uygun ürün yok."
+          : "Favorileriniz boş."}
+      </div>`;
+    return;
+  }
+
+    grid.innerHTML = list.map(p => `
+      <div class="bg-white rounded-3xl shadow-sm p-4 flex flex-col gap-4">
+
+        <div class="relative rounded-2xl overflow-hidden bg-slate-100">
+          <img src="${p.image}" class="w-full h-[260px] object-cover"/>
+
+          <button
+            class="remove-fav absolute top-3 right-3 bg-white size-9 rounded-full
+                   flex items-center justify-center text-red-500"
+            data-id="${p.id}">
+            <span class="material-symbols-outlined">favorite</span>
+          </button>
+        </div>
+
+        <div>
+          <p class="font-medium">${p.name}</p>
+          <p class="text-slate-500">₺${p.price}</p>
+        </div>
+
+        <button
+          class="add-cart h-11 rounded-xl bg-[#f3dfd6] text-[#9a5b45] font-semibold"
+          data-id="${p.id}">
+          Sepete Ekle
+        </button>
+      </div>
+    `).join("");
+  }
+
+  // ilk render
+  render(getFavorites());
+
+  // 🔥 EVENT DELEGATION
+  document.addEventListener("click", (e) => {
+
+    /* FAVORİDEN ÇIKAR */
+    if (e.target.closest(".remove-fav")) {
+      const id = e.target.closest(".remove-fav").dataset.id;
+      const updated = getFavorites().filter(p => p.id !== id);
+      setFavorites(updated);
+      render(updated);
+    }
+
+    /* SEPETE EKLE */
+    if (e.target.closest(".add-cart")) {
+      const id = e.target.closest(".add-cart").dataset.id;
+      const favorites = getFavorites();
+      const product = favorites.find(p => p.id === id);
+      if (!product) return;
+
+      const cart = getCart();
+      const existing = cart.find(i => i.id === id);
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1
+        });
+      }
+
+      setCart(cart);
+      showToast("🛒 Sepete eklendi");
+    }
+
+  });
+});
+
+// 🍞 TOAST
+function showToast(msg) {
+  let toast = document.getElementById("toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.className =
+      "fixed bottom-6 right-6 bg-black/90 text-white px-5 py-3 rounded-xl text-sm";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.display = "block";
+  setTimeout(() => toast.style.display = "none", 2000);
+}
+
+
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    handleTab(tab.dataset.tab);
+    setActiveTab(tab);
+  });
+});
+
+function setActiveTab(activeTab) {
+  document.querySelectorAll(".tab").forEach(t => {
+    t.classList.remove("border-b-primary", "text-primary");
+    t.classList.add("border-b-transparent", "text-slate-500");
+  });
+
+  activeTab.classList.add("border-b-primary", "text-primary");
+}
+
+
+function handleTab(type) {
+  const favorites = getFavorites();
+  let filtered = favorites;
+
+  if (type === "sale") {
+    filtered = favorites.filter(p => p.sale === true);
+  }
+
+  if (type === "price-drop") {
+    filtered = favorites.filter(p => p.sale === true);
+  }
+
+  if (type === "out") {
+    filtered = favorites.filter(p => p.inStock === false);
+  }
+
+  render(filtered, type !== "all");
+}
+
+
+
+
+</script>
+
+
+
+
+</body></html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout - BAGVERSE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+
+
+
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Top Nav Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-800 px-4 sm:px-6 lg:px-8 py-4 bg-white dark:bg-background-dark sticky top-0 z-20">
+<a href="index.html" class="flex items-center gap-3 text-slate-900 dark:text-slate-50">
+  <div class="size-6 text-primary">
+    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_6_535)">
+        <path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_6_535">
+          <rect fill="white" width="48" height="48"></rect>
+        </clipPath>
+      </defs>
+    </svg>
+  </div>
+  <h2 class="text-lg font-bold tracking-[-0.015em]">BAGVERSE</h2>
+</a>
+
+<div class="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+<span class="material-symbols-outlined text-base">lock</span>
+<span>Güvenli Ödeme</span>
+</div>
+</header>
+<main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+<!-- Left Column: Checkout Form -->
+<div class="lg:col-span-3">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 mb-8">
+<a class="text-primary text-sm font-medium" href="index.html">Anasayfa</a>
+<span class="text-gray-500 dark:text-gray-400 text-sm font-medium">/</span>
+<a class="text-primary text-sm font-medium" href="cart.html">Sepet</a>
+<span class="text-gray-500 dark:text-gray-400 text-sm font-medium">/</span>
+<span class="text-gray-800 dark:text-gray-200 text-sm font-bold">Ödeme</span>
+</div>
+<!-- Contact Information -->
+<div class="mb-10">
+<h2 class="text-gray-800 dark:text-gray-200 text-[22px] font-bold leading-tight tracking-[-0.015em] pb-4">İletişim Bilgileri</h2>
+<label class="flex flex-col w-full">
+<p class="text-gray-700 dark:text-gray-300 text-sm font-medium leading-normal pb-2">Email</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-gray-700 bg-white dark:bg-background-dark h-12 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-4 text-base font-normal" placeholder="ornek@email.com" value=""/>
+</label>
+</div>
+<!-- Shipping Information -->
+<div class="mb-10">
+<h2 class="text-gray-800 dark:text-gray-200 text-[22px] font-bold leading-tight tracking-[-0.015em] pb-4 border-t border-gray-200 dark:border-gray-800 pt-8">Kargo Bilgileri</h2>
+<div class="mt-6">
+  <h3 class="text-lg font-bold mb-4">Adres Seç</h3>
+  <div class="mb-6">
+  <p class="text-sm font-medium mb-2">Kayıtlı Adresler</p>
+
+
+
+  <div id="checkoutAddressList" class="space-y-4"></div>
+
+<a
+  href="adress-form.html" onclick="setReturnToCheckout()"
+  class="inline-block mt-4 text-primary font-semibold hover:underline cursor-pointer"
+>
+  + Yeni adres ekle
+</a>
+</div>
+
+</div>
+
+</div><!-- Payment Information -->
+
+<!-- Payment Method -->
+<div>
+<h2 class="text-gray-800 dark:text-gray-200 text-[22px] font-bold leading-tight tracking-[-0.015em] pb-4 border-t border-gray-200 dark:border-gray-800 pt-8">Ödeme Yöntemi</h2>
+<div class="rounded-lg border border-primary dark:border-primary bg-primary/5 dark:bg-primary/10 p-5">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<input checked="" class="form-radio h-4 w-4 text-primary focus:ring-primary" id="credit-card" name="payment" type="radio"/>
+<label class="text-gray-800 dark:text-gray-200 font-semibold" for="credit-card">Kredi Kartı / Banka Kartı</label>
+</div>
+<div class="flex items-center gap-2">
+<img class="h-6" data-alt="Visa" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo-4b207Nw-4-Td4EUD5DsL66lRXC1XNs84bZ-zJs2kkDjcgs8Fin1hGj8poHddJ4biYrNowkbMzuatVqRx0sWdMk2TK-sQ-vBeU6tCCNqX92B0b-82D7nHFJ_PzEPYHkXm8g2bzWHy5WMeHuVpdffHNzpMK0C_WQ12JEcrg33duUyyqz3Oss0tUiFowqzvBP-Bak3y-vkHwcsGfwU5XrpfBmuYFnHhA4rJ88raY89f2zIERfMn2ODnfW1_OF11NBneDM_euFH3E8"/>
+<img class="h-6" data-alt="Mastercard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9yg5bS2ZedBahRhkBl4a8daz7APC6oV6A6-W-YeOLZj6T1d1xf3bA3pQrtxLyFmpJAurruehG8PZSc08G_PuQD-LX0BgiTXPtcA4vTVKfdGFEPo26gcNlzZlxC7Byy7ptXQljr4duaN62uFIPB3efF1CouKYoRcYafkC8xGVKGlMAoFVJnEqMFDGfyuBsbUECOnu9oVGWPw_ezrZulm_wGkJTGXsTndw7OlPAek6OrVpMCBJVnQ0ddV9hV5jfK6kyWeEqgeeHCeA"/>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-4 mt-6">
+<label class="flex flex-col w-full">
+  <p class="text-sm font-medium pb-2">Kart Numarası</p>
+
+  <div class="relative">
+    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+      credit_card
+    </span>
+
+    <input
+      id="cardNumber"
+      type="text"
+      maxlength="19"
+      placeholder="1234 5678 9012 3456"
+      class="form-input w-full h-12 pl-10 rounded-lg border border-gray-300
+      bg-white dark:bg-background-dark
+      focus:ring-2 focus:ring-primary/50"
+    />
+  </div>
+</label>
+<div class="relative">
+  <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+    person
+  </span>
+
+  <input
+    id="cardName"
+    type="text"
+    placeholder="Ad Soyad"
+    class="form-input w-full h-12 pl-10 rounded-lg border"
+  />
+</div>
+
+<div class="grid grid-cols-2 gap-4">
+<label class="flex flex-col w-full">
+<p class="text-gray-700 dark:text-gray-300 text-sm font-medium pb-2">Son Kullanma Tarihi</p>
+<input
+  id="cardDate"
+  type="text"
+  maxlength="7"
+  placeholder="AA / YY"
+  class="form-input flex w-full rounded-lg text-gray-900 dark:text-white
+  focus:outline-0 focus:ring-2 focus:ring-primary/50
+  border border-gray-300 dark:border-gray-700
+  bg-white dark:bg-background-dark
+  h-12 placeholder:text-gray-400 dark:placeholder:text-gray-500
+  px-4 text-base"
+/>
+</label>
+<label class="flex flex-col w-full">
+<div class="flex items-center gap-2 pb-2">
+<p class="text-gray-700 dark:text-gray-300 text-sm font-medium">CVV</p>
+<span class="material-symbols-outlined text-sm text-gray-500 cursor-pointer">info</span>
+</div>
+<input
+  id="cardCVV"
+  type="text"
+  maxlength="3"
+  placeholder="•••"
+  class="form-input flex w-full rounded-lg text-gray-900 dark:text-white 
+  focus:outline-0 focus:ring-2 focus:ring-primary/50 
+  border border-gray-300 dark:border-gray-700 
+  bg-white dark:bg-background-dark 
+  h-12 placeholder:text-gray-400 dark:placeholder:text-gray-500 
+  px-4 text-base"
+/>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Complete Order Button -->
+<div class="mt-10 pt-8 border-t border-gray-200 dark:border-gray-800">
+<button
+  type="button"
+  id="completeOrderBtn"
+  class="flex w-full items-center justify-center rounded-lg h-14 bg-primary text-white font-bold">
+  Siparişi Tamamla
+</button>
+
+
+<p class="text-center text-xs text-gray-500 dark:text-gray-400 mt-4">
+                            Siparişi tamamlayarak <a class="text-primary hover:underline" href="terms.html">kullanım koşullarını</a> ve <a class="text-primary hover:underline" href="returns.html">iade politikasını</a> kabul etmiş olursunuz.
+                        </p>
+</div>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-2">
+<div class="lg:col-span-2">
+  <div class="sticky top-28 bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 rounded-xl p-6">
+
+    <h2 class="text-gray-800 dark:text-gray-200 text-[22px] font-bold pb-5">
+      Sipariş Özeti
+    </h2>
+
+    <!-- ÜRÜNLER -->
+    <div class="space-y-4" id="checkoutItems"></div>
+
+    <!-- AYRAÇ -->
+    <hr class="my-6">
+
+    <!-- TOPLAM BİLGİLERİ -->
+    <div class="space-y-2 text-sm">
+      <div class="flex justify-between">
+        <span>Ara Toplam</span>
+        <span id="subtotal">₺0.00</span>
+      </div>
+
+
+      <div id="discount-row" class="flex justify-between text-green-600 hidden">
+  <span>İndirim</span>
+  <span id="discountAmount">-0 TL</span>
+</div>
+
+      <div class="flex justify-between">
+        <span>Kargo</span>
+        <span id="shipping">₺0.00</span>
+      </div>
+
+      <hr>
+
+      <div class="flex justify-between font-bold text-lg">
+        <span>Toplam</span>
+        <span id="total">₺0.00</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+</div>
+</div>
+</main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+
+
+  function generateTrackingNumber() {
+  return "BV" + Math.floor(100000000 + Math.random() * 900000000);
+}
+const cargoCompanies = [
+  "Yurtiçi Kargo",
+  "MNG Kargo",
+  "Aras Kargo",
+  "PTT Kargo"
+];
+
+const selectedCargo =
+  cargoCompanies[Math.floor(Math.random() * cargoCompanies.length)];
+
+document.addEventListener("DOMContentLoaded", () => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+
+  /* =====================
+     SEPET & FİYATLAR
+  ====================== */
+
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
+
+  const checkoutItems = document.getElementById("checkoutItems");
+  const completeBtn = document.getElementById("completeOrderBtn");
+  const addressList = document.getElementById("checkoutAddressList");
+
+  if (cart.length === 0) {
+    Swal.fire("Sepet boş", "Lütfen ürün ekleyin", "error")
+      .then(() => window.location.href = "products.html");
+    return;
+  }
+
+  checkoutItems.innerHTML = "";
+  cart.forEach(item => {
+    checkoutItems.innerHTML += `
+      <div class="flex items-center gap-4">
+        <img src="${item.image}" class="h-20 w-20 rounded-lg object-cover border">
+        <div class="flex-1">
+          <p class="font-semibold">${item.name}</p>
+          <p class="text-sm text-gray-500">Adet: ${item.quantity}</p>
+        </div>
+        <p class="font-semibold">₺${(item.price * item.quantity).toFixed(2)}</p>
+      </div>
+    `;
+  });
+
+  const subtotal = Number(localStorage.getItem("cartSubtotal")) || 0;
+  const discount = Number(localStorage.getItem("cartDiscount")) || 0;
+  const shipping = subtotal >= 3000 ? 0 : 50;
+  const total = subtotal - discount + shipping;
+const appliedPromoCode = localStorage.getItem("appliedPromoCode");
+
+
+  document.getElementById("subtotal").innerText = `₺${subtotal.toFixed(2)}`;
+  document.getElementById("shipping").innerText =
+    shipping === 0 ? "Ücretsiz" : `₺${shipping.toFixed(2)}`;
+  document.getElementById("total").innerText = `₺${total.toFixed(2)}`;
+
+  if (discount > 0) {
+    document.getElementById("discount-row").classList.remove("hidden");
+    document.getElementById("discountAmount").innerText =
+      `-₺${discount.toFixed(2)}`;
+  }
+
+  /* =====================
+     ADRESLER
+  ====================== */
+
+  let selectedAddressIndex = null;
+
+  if (addresses.length === 0) {
+    addressList.innerHTML =
+      "<p class='text-red-500 text-sm'>Adres eklemeden devam edemezsiniz.</p>";
+    completeBtn.disabled = true;
+  } else {
+    addressList.innerHTML = "";
+    addresses.forEach((addr, index) => {
+      addressList.innerHTML += `
+        <label class="flex gap-3 p-4 border rounded-lg cursor-pointer">
+          <input type="radio" name="address" value="${index}">
+          <div>
+            <p class="font-semibold">${addr.title}</p>
+            <p class="text-sm">${addr.detail}</p>
+            <p class="text-sm">${addr.phone}</p>
+          </div>
+        </label>
+      `;
+    });
+
+    document.querySelectorAll("input[name='address']").forEach(input => {
+      input.addEventListener("change", e => {
+        selectedAddressIndex = Number(e.target.value);
+        completeBtn.disabled = false;
+      });
+    });
+  }
+
+  /* =====================
+     SİPARİŞ TAMAMLAMA
+  ====================== */
+
+  completeBtn.addEventListener("click", () => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if (!currentUser) {
+  Swal.fire("Giriş yapmalısınız", "", "error");
+  return;
+}
+
+
+    const cardNumber = document.getElementById("cardNumber").value.trim();
+    const cardName = document.getElementById("cardName").value.trim();
+    const cardDate = document.getElementById("cardDate").value.trim();
+    const cardCVV = document.getElementById("cardCVV").value.trim();
+
+    if (!cardNumber || !cardName || !cardDate || !cardCVV) {
+      Swal.fire("Kart bilgileri eksik", "", "error");
+      return;
+    }
+
+    if (selectedAddressIndex === null) {
+      Swal.fire("Adres seçin", "", "error");
+      return;
+    }
+
+  const cleanCardNumber = cardNumber.replace(/\s/g, "");
+
+const order = {
+  id: Date.now(),
+  userEmail: currentUser.email,
+  items: cart,
+  subtotal,
+  discount,
+  discountCode: appliedPromoCode,
+  shipping,
+  total,
+  address: addresses[selectedAddressIndex],
+  date: new Date().toISOString(), // ⚠️ küçük ama önemli düzeltme
+  payment: {
+    type: cleanCardNumber.startsWith("4") ? "Visa" :
+          cleanCardNumber.startsWith("5") ? "MasterCard" : "Kart",
+    last4: cleanCardNumber.slice(-4)
+  },
+  shippingInfo: {
+    company: selectedCargo,
+    trackingNo: generateTrackingNumber()
+  },
+  status: "received"
+};
+
+
+// 📦 Siparişleri kaydet
+const orders = JSON.parse(localStorage.getItem("orders")) || [];
+orders.push(order);
+localStorage.setItem("orders", JSON.stringify(orders));
+localStorage.removeItem("cart");
+localStorage.removeItem("appliedPromoCode");
+
+
+
+// 🔔 ACTIVITY EKLE (DOĞRU YER)
+const activities = JSON.parse(localStorage.getItem("activities")) || [];
+
+activities.unshift({
+  id: Date.now(),
+  type: "order",
+  message: `${currentUser.email} yeni bir sipariş oluşturdu`,
+  orderId: order.id,
+  date: new Date().toISOString()
+});
+
+// sadece son 5 activity
+localStorage.setItem("activities", JSON.stringify(activities.slice(0, 5)));
+
+localStorage.removeItem("cart");
+localStorage.setItem("lastOrder", JSON.stringify(order));
+
+
+// 🧾 Son sipariş
+localStorage.setItem("lastOrder", JSON.stringify(order));
+
+
+    Swal.fire({
+      icon: "success",
+      title: "Siparişiniz alındı 🎉",
+      confirmButtonText: "Tamam"
+    }).then(() => {
+      window.location.href = "thank-you.html";
+    });
+
+  });
+
+});
+
+
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* 💳 KART NUMARASI (4'lü boşluk) */
+  const cardNumber = document.getElementById("cardNumber");
+  cardNumber.addEventListener("input", () => {
+    let value = cardNumber.value.replace(/\D/g, "").slice(0, 16);
+    cardNumber.value = value.replace(/(.{4})/g, "$1 ").trim();
+  });
+
+  /* 📅 AY / YIL (AA / YY) */
+  const cardDate = document.getElementById("cardDate");
+  cardDate.addEventListener("input", () => {
+    let value = cardDate.value.replace(/\D/g, "").slice(0, 4);
+
+    if (value.length >= 2) {
+      let month = parseInt(value.slice(0, 2), 10);
+      if (month < 1) month = 1;
+      if (month > 12) month = 12;
+      value = month.toString().padStart(2, "0") + value.slice(2);
+    }
+
+    if (value.length > 2) {
+      cardDate.value = value.slice(0, 2) + " / " + value.slice(2);
+    } else {
+      cardDate.value = value;
+    }
+  });
+
+  /* 🔐 CVV (SADECE 3 RAKAM) */
+  const cardCVV = document.getElementById("cardCVV");
+  cardCVV.addEventListener("input", () => {
+    cardCVV.value = cardCVV.value.replace(/\D/g, "").slice(0, 3);
+  });
+
+});
+
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("addNewAddressBtn");
+
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    console.log("checkout → adres formuna gidiliyor");
+
+   btn.addEventListener("click", () => {
+    localStorage.removeItem("editAddressIndex");
+  window.location.href = "adress-form.html?from=checkout";
+});
+});
+});
+</script>
+
+
+
+</body></html>

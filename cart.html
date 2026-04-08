@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopping Cart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#0d141b] dark:text-white">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-4 text-[#0d141b] dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_535)">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clippath id="clip0_6_535"><rect fill="white" height="48" width="48"></rect></clippath>
+</defs>
+</svg>
+</div>
+<h2 class="text-lg font-bold tracking-[-0.015em]">BAGVERSE</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+  
+<a class="text-sm font-medium hover:text-primary dark:hover:text-primary" href="index.html">Anasayfa</a>
+<a class="text-sm font-medium hover:text-primary dark:hover:text-primary" href="products.html">Ürünler</a>
+
+
+</nav>
+<div class="flex items-center gap-2">
+<a href="favorites.html">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/50 dark:bg-slate-800/50 text-[#0d141b] dark:text-white hover:bg-slate-200 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">favorite</span>
+</button> </a>
+<a href="cart.html">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary/20 text-primary hover:bg-primary/30">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+</a>
+<a href="profile.html">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/50 dark:bg-slate-800/50 text-[#0d141b] dark:text-white hover:bg-slate-200 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">person</span>
+</button></a>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<!-- PageHeading -->
+<div class="mb-8">
+<h1  id="cart-count" class="text-[#0d141b] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Sepetim (0 Ürün)</h1>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 xl:gap-12 items-start">
+<!-- Left Column: Cart Items -->
+<div class="lg:col-span-2 space-y-6">
+<div class="overflow-x-auto bg-white dark:bg-background-dark rounded-lg border border-slate-200 dark:border-slate-800">
+<table class="w-full text-left">
+<thead class="border-b border-slate-200 dark:border-slate-800">
+<tr>
+<th class="p-4 text-sm font-medium text-slate-500 dark:text-slate-400 w-2/5">Ürün</th>
+<th class="p-4 text-sm font-medium text-slate-500 dark:text-slate-400 w-1/5 text-right">Fiyat</th>
+<th class="p-4 text-sm font-medium text-slate-500 dark:text-slate-400 w-1/5 text-center">Adet</th>
+<th class="p-4 text-sm font-medium text-slate-500 dark:text-slate-400 w-1/5 text-right">Toplam</th>
+<th class="p-4 w-[50px]"></th>
+</tr>
+</thead>
+<tbody id="cart-items">
+
+</tbody>
+</table>
+</div>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline" href="products.html">
+<span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+                        Alışverişe Devam Et
+                    </a>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-1">
+<div class="sticky top-24">
+<div class="bg-white dark:bg-background-dark rounded-lg border border-slate-200 dark:border-slate-800 p-6 space-y-6">
+<!-- SectionHeader -->
+<h2 class="text-[#0d141b] dark:text-white text-xl font-bold leading-tight">Sipariş Özeti</h2>
+<!-- Promo Code -->
+<div>
+<label class="text-sm font-medium text-slate-600 dark:text-slate-300" for="promo-code">İndirim Kodu</label>
+<div class="mt-1 flex gap-2">
+<input class="block w-full rounded-md border-slate-300 dark:border-slate-700 shadow-sm focus:border-primary focus:ring-primary sm:text-sm bg-slate-100 dark:bg-slate-900 dark:text-white" id="promo-code" placeholder="İndirim Kodu Girin" type="text"/>
+<button id="apply-promo" class="px-4 py-2 rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">Uygula</button>
+</div>
+</div>
+<!-- DescriptionList -->
+<div class="space-y-3">
+  <div class="flex justify-between items-center">
+    <p class="text-slate-500">Ara Toplam</p>
+    <p id="subtotal" class="font-medium text-right">0,00 TL</p>
+  </div>
+
+ <div id="discount-row" class="flex justify-between items-center" style="display:none;">
+  <p class="text-slate-500">İndirim</p>
+  <p id="discount" class="font-medium text-right text-green-600">-0 TL</p>
+</div>
+
+  <div class="flex justify-between items-center">
+    <p class="text-slate-500">Kargo</p>
+    <p id="shipping" class="font-medium text-right">0,00 TL</p>
+  </div>
+
+  <p class="text-xs text-slate-400 text-right -mt-2">
+    3000 TL ve üzeri alışverişlerde kargo ücretsiz! 🚚
+  </p>
+  
+  <p class="text-xs text-slate-400 text-right -mt-2">
+Ödeme adımında hesaplanacaktır.  </p>
+</div>
+
+<div class="border-t pt-4">
+  <div class="flex justify-between items-center text-lg">
+    <p class="font-semibold">Genel Toplam</p>
+    <p id="total" class="font-bold text-right">0,00 TL</p>
+  </div>
+</div>
+
+<!-- Primary CTA -->
+ <a href="checkout.html">
+<button class="w-full flex items-center justify-center rounded-lg bg-[#E2725B] hover:bg-[#d9634a] px-6 py-3 text-base font-bold text-white shadow-sm transition-colors">
+                               Ödeme Yap
+                               <span class="material-symbols-outlined ml-2">arrow_forward</span>
+</button> </a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<script>
+
+
+console.log(
+  document.getElementById("cardNumber"),
+  document.getElementById("cardName"),
+  document.getElementById("cardDate"),
+  document.getElementById("cardCVV")
+);
+
+
+
+const cartItemsEl = document.getElementById("cart-items");
+const subtotalEl = document.getElementById("subtotal");
+const shippingEl = document.getElementById("shipping");
+const totalEl = document.getElementById("total");
+const cartCountEl = document.getElementById("cart-count");
+const promoInput = document.getElementById("promo-code");
+const applyPromoBtn = document.getElementById("apply-promo");
+const discountRow = document.getElementById("discount-row");
+const discountEl = document.getElementById("discount");
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let appliedDiscount = 0;
+let appliedPromoCode = null;
+
+function renderCart() {
+  cartItemsEl.innerHTML = "";
+
+  if (cart.length === 0) {
+    cartItemsEl.innerHTML = `
+      <tr>
+        <td colspan="5" class="p-10 text-center text-slate-400">
+          Sepetiniz boş 🛒
+        </td>
+      </tr>`;
+    cartCountEl.innerText = "Sepetim (0 Ürün)";
+    subtotalEl.innerText = "0,00 TL";
+    totalEl.innerText = "0,00 TL";
+    return;
+  }
+
+  
+
+  let subtotal = 0;
+
+  let totalQuantity = 0;
+
+  cart.forEach((item, index) => {
+    subtotal += item.price * item.quantity;
+    totalQuantity += item.quantity;
+    appliedDiscount = Math.min(appliedDiscount, subtotal);
+
+
+    cartItemsEl.innerHTML += `
+      <tr class="border-b border-slate-200 dark:border-slate-800">
+        <td class="p-4">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-lg bg-cover bg-center"
+                 style="background-image:url('${item.image}')"></div>
+            <div>
+              <p class="font-semibold">${item.name}</p>
+           ${item.color ? `
+  <p class="text-sm text-slate-400">Renk: ${item.color}</p>
+` : ``}
+
+            </div>
+          </div>
+        </td>
+
+        <td class="p-4 text-right">${item.price} TL</td>
+
+        <td class="p-4">
+          <div class="flex justify-center border rounded-lg">
+            <button onclick="changeQty(${index}, -1)" class="px-2">-</button>
+            <span class="px-2">${item.quantity}</span>
+            <button onclick="changeQty(${index}, 1)" class="px-2">+</button>
+          </div>
+        </td>
+
+        <td class="p-4 text-right font-bold">
+          ${item.price * item.quantity} TL
+        </td>
+
+        <td class="p-4 text-center">
+<button 
+  onclick="removeItem(${index})"
+  class="text-red-500 hover:text-red-700 transition"
+  title="Ürünü sil">
+  <span class="material-symbols-outlined">delete</span>
+</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  cartCountEl.innerText = `Sepetim (${totalQuantity} Ürün)`;
+  subtotalEl.innerText = subtotal.toFixed(2) + " TL";
+let shipping = subtotal >= 3000 ? 0 : 50;
+
+shippingEl.innerText = shipping === 0 ? "Ücretsiz" : shipping.toFixed(2) + " TL";
+
+
+discountRow.style.display = appliedDiscount > 0 ? "flex" : "none";
+discountEl.innerText = "- " + appliedDiscount.toFixed(2) + " TL";
+
+let finalTotal = subtotal - appliedDiscount + shipping;
+totalEl.innerText = finalTotal.toFixed(2) + " TL";
+
+localStorage.setItem("cartSubtotal", subtotal);
+localStorage.setItem("cartDiscount", appliedDiscount);
+localStorage.setItem("cartShipping", shipping);
+localStorage.setItem("cartTotal", finalTotal);
+
+
+if (appliedDiscount > 0) {
+  discountRow.classList.remove("hidden");
+  discountEl.innerText = "- " + appliedDiscount.toFixed(2) + " TL";
+} else {
+  discountRow.classList.add("hidden");
+}
+
+
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function changeQty(index, amount) {
+  cart[index].quantity += amount;
+  if (cart[index].quantity <= 0) cart.splice(index, 1);
+  renderCart();
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
+
+
+applyPromoBtn.addEventListener("click", () => {
+  const code = promoInput.value
+    .trim()
+    .toUpperCase()
+    .replaceAll("İ", "I");
+
+  if (!code) {
+    showToast("İndirim kodu giriniz ✍️", "info");
+    return;
+  }
+
+  if (appliedPromoCode === code) {
+    showToast("Bu indirim kodu zaten uygulandı ⚠️", "info");
+    return;
+  }
+
+  let subtotal = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  appliedDiscount = 0;
+
+  if (code === "BAGVERSE10") {
+    appliedDiscount = subtotal * 0.10;
+    showToast("🎉 %10 indirim uygulandı!", "success");
+  } 
+  else if (code === "INDIRIM200") {
+    appliedDiscount = 200;
+    showToast("🎉 200 TL indirim uygulandı!", "success");
+  } 
+  else {
+    showToast("Geçersiz indirim kodu 😢", "error");
+    return;
+  }
+
+  appliedPromoCode = code;
+  localStorage.setItem("appliedPromoCode", code);
+  renderCart();
+});
+
+
+if (cart.length === 0) {
+  appliedDiscount = 0;
+  appliedPromoCode = null;
+}
+
+
+
+function showToast(message, type = "success") {
+  const toast = document.getElementById("toast");
+  const toastMessage = document.getElementById("toast-message");
+
+  toastMessage.innerText = message;
+
+  // Renkler
+  toast.className =
+    "fixed top-6 right-6 z-50 max-w-sm rounded-lg shadow-lg p-4 text-white transition-all duration-300";
+
+  if (type === "success") {
+    toast.classList.add("bg-green-500");
+  } else if (type === "error") {
+    toast.classList.add("bg-red-500");
+  } else if (type === "info") {
+    toast.classList.add("bg-blue-500");
+  }
+
+  toast.classList.remove("hidden");
+
+  setTimeout(() => {
+    toast.classList.add("hidden");
+  }, 3000);
+}
+
+
+renderCart();
+
+
+console.log(cartItemsEl);
+
+</script>
+
+<div id="toast"
+  class="fixed top-6 right-6 z-50 hidden max-w-sm rounded-lg shadow-lg p-4 text-white transition-all duration-300">
+  <p id="toast-message" class="text-sm font-medium"></p>
+</div>
+ 
+</body></html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BagVerse - Carry Confidence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#A6907C",
+            secondary: "#2D2A26",
+            accent: "#D6CFC7",
+            "background-light": "#FAF9F6",
+            "background-dark": "#121212",
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            serif: ["Playfair Display", "serif"],
+          },
+          borderRadius: {
+            'xl': "1rem",
+            '2xl': "1.5rem",
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 1s ease-out forwards',
+            'float-slow': 'float 8s ease-in-out infinite',
+            'float-medium': 'float 6s ease-in-out infinite',
+            'float-fast': 'float 5s ease-in-out infinite',
+            'marquee': 'marquee 40s linear infinite',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' },
+            }
+          }
+        },
+      },
+    };
+  </script>
+<style type="text/tailwindcss">
+    .glass-nav {
+        @apply backdrop-blur-md bg-white/70 dark:bg-black/30 border border-white/20 dark:border-white/10;
+    }
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-stone-800 to-stone-500 dark:from-stone-100 dark:to-stone-400;
+    }
+    .hero-glow {
+        background: radial-gradient(circle at center, rgba(185, 168, 153, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+    }
+    .dark .hero-glow {
+        background: radial-gradient(circle at center, rgba(185, 168, 153, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    }.no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-stone-800 dark:text-stone-200 antialiased selection:bg-primary selection:text-white">
+<div class="relative min-h-screen overflow-hidden flex flex-col">
+<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute top-[30%] -right-[10%] w-[40%] h-[40%] rounded-full bg-accent/20 dark:bg-stone-800/30 blur-[100px]"></div>
+<div class="absolute -bottom-[10%] left-[20%] w-[60%] h-[40%] rounded-full bg-stone-200/30 dark:bg-stone-900/40 blur-[120px]"></div>
+</div>
+<div aria-hidden="true" class="absolute inset-0 z-0 opacity-40 dark:opacity-20 pointer-events-none">
+<div class="absolute top-[15%] left-[8%] w-64 h-64 text-stone-400 animate-float-slow rotate-[-6deg]">
+<svg class="drop-shadow-xl" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 8V6C16 3.79086 14.2091 2 12 2V2C9.79086 2 8 3.79086 8 6V8" stroke="currentColor" stroke-linecap="round" stroke-width="0.5"></path>
+<path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V19C19 20.6569 17.6569 22 16 22H8C6.34315 22 5 20.6569 5 19V9Z" stroke="currentColor" stroke-linecap="round" stroke-width="0.5"></path>
+<path d="M9 12H15" stroke="currentColor" stroke-linecap="round" stroke-width="0.5"></path>
+</svg>
+</div>
+<div class="absolute bottom-[10%] right-[5%] w-80 h-80 text-primary/60 animate-float-medium rotate-[12deg]">
+<svg class="drop-shadow-2xl" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<rect height="15" rx="2" stroke="currentColor" stroke-width="0.4" width="18" x="3" y="6"></rect>
+<path d="M7 6V4C7 2.89543 7.89543 2 9 2H15C16.1046 2 17 2.89543 17 4V6" stroke="currentColor" stroke-linecap="round" stroke-width="0.4"></path>
+<path d="M12 11V14" stroke="currentColor" stroke-linecap="round" stroke-width="0.4"></path>
+<circle class="opacity-30" cx="12" cy="12.5" fill="currentColor" r="1"></circle>
+</svg>
+</div>
+<div class="absolute top-[25%] right-[18%] w-40 h-40 text-stone-300 dark:text-stone-600 animate-float-fast rotate-[-15deg]">
+<svg class="drop-shadow-lg" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 6C9 4.34315 10.3431 3 12 3C13.6569 3 15 4.34315 15 6" stroke="currentColor" stroke-linecap="round" stroke-width="0.6"></path>
+<path d="M5 8H19L20 20H4L5 8Z" stroke="currentColor" stroke-linejoin="round" stroke-width="0.6"></path>
+<path d="M12 12V14" stroke="currentColor" stroke-width="0.6"></path>
+</svg>
+</div>
+<div class="absolute bottom-[20%] left-[15%] w-32 h-32 text-stone-300 dark:text-stone-700 animate-float-slow rotate-[45deg] opacity-60">
+<svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="0.3"></circle>
+<path d="M12 4V20" stroke="currentColor" stroke-width="0.3"></path>
+<path d="M4 12H20" stroke="currentColor" stroke-width="0.3"></path>
+</svg>
+</div>
+</div>
+<header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-center w-full">
+<div class="glass-nav rounded-full px-8 py-3 flex items-center justify-between w-full max-w-6xl shadow-sm hover:shadow-md transition-all duration-500">
+<a class="flex items-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:rotate-12 transition-transform duration-300">shopping_bag</span>
+<span class="text-xl font-serif font-bold tracking-wide text-stone-900 dark:text-white">BagVerse</span>
+</a>
+<nav class="hidden md:block">
+<ul class="flex items-center gap-10 text-sm font-medium tracking-wide">
+<li><a class="relative text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white transition-colors after:content-[''] after:absolute after:w-0 after:h-px after:bg-primary after:left-0 after:-bottom-1 hover:after:w-full after:transition-all after:duration-300" href="index.html">Anasayfa</a></li>
+<li><a class="relative text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white transition-colors after:content-[''] after:absolute after:w-0 after:h-px after:bg-primary after:left-0 after:-bottom-1 hover:after:w-full after:transition-all after:duration-300" href="contact.html">İletişim</a></li>
+<li><a class="relative text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white transition-colors after:content-[''] after:absolute after:w-0 after:h-px after:bg-primary after:left-0 after:-bottom-1 hover:after:w-full after:transition-all after:duration-300" href="about-us.html">Hakkımızda</a></li>
+</ul>
+</nav>
+<div class="flex items-center gap-4">
+<a class="hidden sm:flex items-center gap-1 text-sm font-medium text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white transition-colors" href="log-in.html">
+                    Giriş Yap
+                </a>
+<a class="rounded-full bg-stone-900 dark:bg-white text-white dark:text-stone-900 px-5 py-2 text-sm font-medium hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white transition-all duration-300 shadow-md" href="sign-up.html">
+                    Kaydol
+                </a>
+<button class="md:hidden text-stone-900 dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="relative z-10 flex flex-col flex-grow items-center pt-28 pb-12 w-full">
+<div class="hero-glow absolute inset-0 pointer-events-none"></div>
+<div class="flex flex-col items-center text-center max-w-4xl mx-auto animate-fade-in-up px-4 mb-20">
+<div class="mb-6 inline-flex items-center gap-2 rounded-full border border-stone-200 dark:border-stone-700 bg-white/50 dark:bg-stone-800/50 px-3 py-1 text-xs font-medium uppercase tracking-widest text-stone-500 dark:text-stone-400 backdrop-blur-sm">
+<span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+                Yeni Sezon 2026
+            </div>
+<h1 class="font-serif text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight text-gradient mb-6 leading-tight">
+                Carry <br class="md:hidden"/> <span class="italic font-light text-stone-400 dark:text-stone-500">Confidence</span>
+</h1>
+<p class="mt-4 max-w-lg mx-auto text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed">
+                Doğallık, zarafet ve işlevselliğin mükemmel uyumu. BagVerse ile stiliniz sadece bir aksesuar değil, bir duruş olsun.
+            </p>
+<div class="mt-10 flex flex-col sm:flex-row items-center gap-4">
+<a class="group relative overflow-hidden rounded-full bg-stone-900 dark:bg-stone-100 px-10 py-4 text-base font-medium text-white dark:text-stone-900 shadow-xl transition-all hover:scale-105 hover:shadow-2xl" href="products.html">
+<span class="relative z-10 flex items-center gap-2">
+                        Ürünleri Keşfet 
+                        <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</span>
+<div class="absolute inset-0 -z-0 h-full w-full translate-y-full bg-primary transition-transform duration-300 group-hover:translate-y-0"></div>
+</a>
+
+</div>
+<div class="mt-16 grid grid-cols-3 gap-8 md:gap-16 border-t border-stone-200 dark:border-stone-800 pt-8 opacity-70">
+<div class="text-center">
+<p class="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100">+100</p>
+<p class="text-xs uppercase tracking-wider text-stone-500">Saat Tasarım</p>
+<p class="text-xs uppercase tracking-wider text-stone-500">Ve Geliştirme</p>
+</div>
+<div class="text-center">
+<p class="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100">%100</p>
+<p class="text-xs uppercase tracking-wider text-stone-500">El Yapımı</p>
+</div>
+<div class="text-center">
+<p class="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100">2026</p>
+<p class="text-xs uppercase tracking-wider text-stone-500">Koleksiyonu</p>
+</div>
+</div>
+</div>
+<div class="w-full max-w-[1920px] mx-auto relative overflow-hidden py-10">
+<div class="mb-10 text-center animate-fade-in-up flex flex-col items-center">
+<h3 class="font-serif text-3xl text-stone-800 dark:text-stone-200">En Çok Satanlar</h3>
+<div class="h-0.5 w-12 bg-primary mt-3"></div>
+</div>
+<div class="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-background-light dark:from-background-dark to-transparent z-10 pointer-events-none"></div>
+<div class="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-background-light dark:from-background-dark to-transparent z-10 pointer-events-none"></div>
+<div class="flex w-max animate-marquee hover:[animation-play-state:paused] items-center">
+<div class="flex gap-8 px-4">
+<a class="group w-72 flex-shrink-0 cursor-pointer" href="#">
+<div class="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-4 shadow-lg">
+<img alt="Luna Tote Bag" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAbn8lFlFp-bSfazp0TWTmyDXQfNU2OhT9K7gjEvIqUIu5LAqrm67BydeLZ3lwdYNEEfLXjhepa6DXVwLH5TnXcZJB6V6upSzGAoAnRIicsTBCNJNB2JkcZcwRf0l3OMwqTYV41nxP_j9g_MYAI412JKnWNVBqOcGNIjRi8Cl2npE_4wzWfF7AKT_B4ikrAOWdBGxyvIV_OZpGrE3P8ykdHLcAQIGkmaCWOCEoHxPe2L__CrSckI6hOrHA5E3XZDZ6yjqCFrHZWGY"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-stone-800 dark:text-white text-sm block">arrow_outward</span>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100 mb-1 group-hover:text-primary transition-colors">Luna Tote</h4>
+<p class="text-sm font-medium text-stone-500 dark:text-stone-400">₺4.500</p>
+</div>
+</a>
+<a class="group w-72 flex-shrink-0 cursor-pointer" href="#">
+<div class="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-4 shadow-lg">
+<img alt="Terra Crossbody" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCvKlJYw8I-LgwCTErYoWPmBVgowYTH0M9CAZ8CVFewjbpz6gDWrH5Oq5gaWyOFtDdyiT9_2vUOztgvVf_rgQTlPIl9_LqXIlaFZQJ3w9V8hsAJL2g-Pepe8bE1spCzAwOqltMYOiCBnYVFZqtSEKSyevUeKSIiKv7FEo2ootsCS2d55jXo2Du-BCzMNf6ge3mp1eVOZ2cisd8-xauaAQcxUkbSTtE15h3yMqzFyhEyzRNY_kbioWEor9imC2TEHtMP_Xp5D6rrY0"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-stone-800 dark:text-white text-sm block">arrow_outward</span>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100 mb-1 group-hover:text-primary transition-colors">Terra Crossbody</h4>
+<p class="text-sm font-medium text-stone-500 dark:text-stone-400">₺2.850</p>
+</div>
+</a>
+<a class="group w-72 flex-shrink-0 cursor-pointer" href="#">
+<div class="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-4 shadow-lg">
+<img alt="Aria Clutch" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3VU9SmTQNOFRFmIv_SyVyhhbvdkfI4xHNwPC3ooAJbBBSP24etk8S75ua8IPQUKXHPtvYRrB0715i-6wfpALEGIJVZnZ9peU1YXdOAdoZZMShsX7diuJPaoR1UpSwPasB0dttMfi9_vI33d9ThMrAwAQHXdEao7v42Uu9McPBD-jHSVkY8XlEYCO10gKAubQ8J2fK3uPHE6W1gIl9YVLqzpP6kqLu4xYDdNum91HaupG06wMmWXaRltm_H0rHUDQbOACrdd1aHDI"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-stone-800 dark:text-white text-sm block">arrow_outward</span>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100 mb-1 group-hover:text-primary transition-colors">Aria Clutch</h4>
+<p class="text-sm font-medium text-stone-500 dark:text-stone-400">₺1.950</p>
+</div>
+</a>
+<a class="group w-72 flex-shrink-0 cursor-pointer" href="#">
+<div class="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-4 shadow-lg">
+<img alt="Solis Backpack" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5wxu4ItRL7TaMNjA_PFkcjglJgnCJJ3bFqlGNynzQKz4RV8T3Ma_NJ3A7ON-wR0TcLPrCZ8mdm4PANWjClwc3gblHro5KyiahwaN1wFCqC7WN8FOWsWqo2lfUSYV0ULLFVRSjlS2OQC3y4lIJv5FTdyrgYHr27MuxeJKOeemDsfuWevhl2GMt_QvZeI7qRao2RCd5L2DQEKePTNwBTeTOD01IkdputinzApE2v1Lu4nqjgbhdmnbBJOHPJSGWI6XbnwNPOOWgk64"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-stone-800 dark:text-white text-sm block">arrow_outward</span>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100 mb-1 group-hover:text-primary transition-colors">Solis Backpack</h4>
+<p class="text-sm font-medium text-stone-500 dark:text-stone-400">₺3.200</p>
+</div>
+</a>
+<a class="group w-72 flex-shrink-0 cursor-pointer" href="#">
+<div class="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-4 shadow-lg">
+<img alt="Vesper Wallet" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj0MZmvL5U2DfWk26iwWqW-uFCwJP_YbV74TIiEOF1vwpbdzMMazwcvl_YVM6JYUElG6pfJya80OUXbI22Y7OAXuDKEEjdm3MM9KfibYxxeGBI70F3VAumKuoPsK3Mlrq-Av6maklhemiGc10j4ka1KPb_tp_1caUYbeEaehio6mvq2wF0AZyORVgFkTskdvvuQ0_nEo8iTQuEHL-zYulSLKGStX5D4G9HBChXaTzrTaGOZaVdkATyyPFIJREzLT2x5z75G-NJbIU"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-stone-800 dark:text-white text-sm block">arrow_outward</span>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100 mb-1 group-hover:text-primary transition-colors">Vesper Wallet</h4>
+<p class="text-sm font-medium text-stone-500 dark:text-stone-400">₺1.200</p>
+</div>
+</a>
+</div>
+<div aria-hidden="true" class="flex gap-8 px-4">
+<a class="group w-72 flex-shrink-0 cursor-pointer" href="#">
+<div class="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-4 shadow-lg">
+<img alt="Luna Tote Bag" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_5wK0EyluyRIIYulQbqdbvbIFebHdPdeRoHE-SWcxCPSuOb088vaYf9nGDr6R5Ev2Kx-7WRben-exzZaE3YkV17xATsq7MVfGno3mc0sxgtcPbap7UBLDQsSytAM-zmD6StyAviy3FhmPwmeH5DRH4uOrTzCR0adkDGm5hyesMwdtXmkcuvZAtTwhBYpyByPexFz4RzLmBeIWcrKbW42lDStHwzcPFp9socaKXqu86L2d1ojRDKX4aLt2B40tp2wlS8E96gDxwF0"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-stone-800 dark:text-white text-sm block">arrow_outward</span>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100 mb-1 group-hover:text-primary transition-colors">Luna Tote</h4>
+<p class="text-sm font-medium text-stone-500 dark:text-stone-400">₺1.650</p>
+</div>
+</a>
+<a class="group w-72 flex-shrink-0 cursor-pointer" href="#">
+<div class="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-4 shadow-lg">
+<img alt="Terra Crossbody" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxrSYrXEuaU47P694kMfHg7SfQl6s4yY09LoxXkIj9WZksnf23zIzNmT-kfsB4B1INsitvxhPnYgvW9-j-dQGDMqJTQKFYv_Ri4aTwpiYsJ0bFdd6O-bSI8pkPzL1SBWhNJ75WlNKZr3XG2urtEuCU5LfAy3d83dzpccR0iC_G15yGEC_tIySjSrD7rkfup11GElduX3M8CShzt0NGWTaNQ9jnYyi3t_LSrYLytE-qSkmiT3RayCTgxGH96L-8OUCmICPt3yF1XuA"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-stone-800 dark:text-white text-sm block">arrow_outward</span>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100 mb-1 group-hover:text-primary transition-colors">Terra Crossbody</h4>
+<p class="text-sm font-medium text-stone-500 dark:text-stone-400">₺2.850</p>
+</div>
+</a>
+<a class="group w-72 flex-shrink-0 cursor-pointer" href="#">
+<div class="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-4 shadow-lg">
+<img alt="Aria Clutch" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbYgsyImFPmVYs6YCGJnHj-RVESG-piyWn0YdHuLlw4Gw5fPSKRbW99INeKQ5I2wLbN2ckcyRqnO32ZdeCZXWUZ0MhAKDHQtirp6QUqFH9mtO5DKatpGJH0AgmvN-buNW1dTyK70hwD07b1Dum6Vzp2S643AteeClynxDzrd1ijolWHBXHHwOSUYmCRnwYyNZljr_86bDHoRwV66v9LlvwGe4hdhYyZzkNS6FtDErqXv_X6E2kc22zgMGgFqjxy67iXrItbtVy7dk"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-stone-800 dark:text-white text-sm block">arrow_outward</span>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100 mb-1 group-hover:text-primary transition-colors">Aria Clutch</h4>
+<p class="text-sm font-medium text-stone-500 dark:text-stone-400">₺1.950</p>
+</div>
+</a>
+<a class="group w-72 flex-shrink-0 cursor-pointer" href="#">
+<div class="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-4 shadow-lg">
+<img alt="Solis Backpack" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmpUz9W5dx9TifRet459K11_lEanvPFNMRwG3kimJWycqLIMyeHOjwdD4F6bfLvxWxrw_aYPfxvT3kgpDqo5Iu4Zt2a_Og0skHXxr8tHmUJKgS2FY9PToqgJ9XGXunIVmoiyRRugoNLsdJLK3ui3XuuutLQ_X0NcxCX8Ww7iRDpjUFyBtR-0Q_Oc4Q57HMoFWojvKikz8FTFMgBRpU7fRrDh6gcW41v8g86CpxL8bqLqYWEwUobewRq6fPCB_7M6tL6TLthiTA6Ts"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-stone-800 dark:text-white text-sm block">arrow_outward</span>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100 mb-1 group-hover:text-primary transition-colors">Solis Backpack</h4>
+<p class="text-sm font-medium text-stone-500 dark:text-stone-400">₺3.200</p>
+</div>
+</a>
+<a class="group w-72 flex-shrink-0 cursor-pointer" href="#">
+<div class="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-4 shadow-lg">
+<img alt="Vesper Wallet" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS9Z__-9Z6JatggV0e14HwnKtC29pnlxD6IPTX34QRSSLcPIw7-_xkC6T4TUAnWeM_oW1pTOdVLU5Xozjo4Cdj4nRWuyKfyYIWvWvLs5yu1p4NLaxnrA2JU4H53XAiEdUQw1t3wrSIYUJdI5XlurD-IeD89Ad09Rno7SR_gaA6Jym21XZyzBA9KMvCIMQbCJPqWvdJTTaO2O6dpRsZXQPZ1y8dBVI9FKW6a3vdKL7nnCTOsuGbdVRgyC2n4xidM1Dh_bFhkWrEAZM"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-stone-800 dark:text-white text-sm block">arrow_outward</span>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100 mb-1 group-hover:text-primary transition-colors">Vesper Wallet</h4>
+<p class="text-sm font-medium text-stone-500 dark:text-stone-400">₺1.200</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+</main>
+<footer class="relative z-10 w-full py-6 text-center">
+<p class="text-xs text-stone-400 dark:text-stone-600 font-light tracking-wide">
+            © 2026 BagVerse. Tüm hakları saklıdır.
+        </p>
+</footer>
+</div>
+</body></html>
